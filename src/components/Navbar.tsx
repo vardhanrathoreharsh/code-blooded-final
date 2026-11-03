@@ -4,16 +4,22 @@ import { ViewMode } from '../types';
 interface NavbarProps {
   currentView: ViewMode;
   onNavigate: (view: ViewMode) => void;
+  onRequestLogin: (role: 'student' | 'admin') => void;
   onOpenRaiseModal: () => void;
   activeRole: 'student' | 'admin';
+  currentUser: { id: string; name: string } | null;
+  onLogout: () => void;
   onSwitchRole: (role: 'student' | 'admin') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigate,
+  onRequestLogin,
   onOpenRaiseModal,
   activeRole,
+  currentUser,
+  onLogout,
   onSwitchRole,
 }) => {
   return (
@@ -24,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo */}
           <button
             onClick={() => onNavigate('role-selection')}
-            className="flex items-center space-x-2.5 text-slate-900 group focus:outline-none"
+            className="flex items-center space-x-2.5 text-slate-900 group focus:outline-none cursor-pointer"
             title="CampusPulse Gateway"
           >
             <div className="w-7 h-7 rounded-md bg-[#0f2744] flex items-center justify-center text-white shadow-xs">
@@ -52,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <nav className="hidden md:flex items-center space-x-1 sm:space-x-2 text-sm font-medium">
             <button
               onClick={() => onNavigate('role-selection')}
-              className={`px-3.5 py-1.5 rounded-md transition-colors ${
+              className={`px-3.5 py-1.5 rounded-md transition-colors cursor-pointer ${
                 currentView === 'role-selection'
                   ? 'bg-[#102a43] text-white font-medium text-xs tracking-wide shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 text-xs font-semibold'
@@ -61,28 +67,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               Role Selection / Access
             </button>
             <button
-              onClick={() => {
-                onSwitchRole('student');
-                onNavigate('student-portal');
-              }}
-              className={`px-3.5 py-1.5 rounded-md transition-colors ${
+              onClick={() => onRequestLogin('student')}
+              className={`px-3.5 py-1.5 rounded-md transition-colors cursor-pointer ${
                 currentView === 'student-portal'
                   ? 'bg-[#172c47] text-white font-medium text-xs tracking-wide shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 text-xs font-semibold'
               }`}
+              title="Open Student Login (Enrollment No & Password)"
             >
               Student Portal
             </button>
             <button
-              onClick={() => {
-                onSwitchRole('admin');
-                onNavigate('admin-triage');
-              }}
-              className={`px-3.5 py-1.5 rounded-md transition-colors ${
+              onClick={() => onRequestLogin('admin')}
+              className={`px-3.5 py-1.5 rounded-md transition-colors cursor-pointer ${
                 currentView === 'admin-triage'
                   ? 'bg-[#172c47] text-white font-medium text-xs tracking-wide shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 text-xs font-semibold'
               }`}
+              title="Open Administrator Login (Staff ID & Password)"
             >
               Administrator Triage &amp; Analytics
             </button>
@@ -94,30 +96,36 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Quick Raise Button on Desktop */}
           <button
             onClick={onOpenRaiseModal}
-            className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md bg-[#102a43] hover:bg-[#0c1f33] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-xs"
+            className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md bg-[#102a43] hover:bg-[#0c1f33] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-xs cursor-pointer"
           >
             <span className="mr-1 text-sm font-light">+</span> + Raise Complaint
           </button>
 
+          {/* User Session Badge if authenticated */}
+          {currentUser && (
+            <div className="hidden lg:flex items-center space-x-2 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-mono">
+              <span className={`w-2 h-2 rounded-full ${activeRole === 'student' ? 'bg-blue-600' : 'bg-rose-600'}`}></span>
+              <span className="font-semibold text-slate-800 truncate max-w-[140px]">{currentUser.id}</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-slate-500 uppercase text-[10px]">{activeRole}</span>
+            </div>
+          )}
+
           {/* Live Sync Pill */}
-          <div className="hidden min-[480px]:flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-600 font-medium font-mono">
+          <div className="hidden min-[520px]:flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-600 font-medium font-mono">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="hidden lg:inline">Local Persistence Active</span>
-            <span className="lg:hidden">Local Active</span>
+            <span className="hidden xl:inline">Local Persistence Active</span>
+            <span className="xl:hidden">Local Active</span>
             <span className="text-slate-300">•</span>
             <span className="text-slate-500">Auto-synced</span>
           </div>
 
-          {/* User Profile Avatar with Role Switch Tooltip */}
+          {/* User Profile Avatar with click to authenticate/switch */}
           <div className="relative group">
             <button
-              onClick={() => {
-                const nextRole = activeRole === 'student' ? 'admin' : 'student';
-                onSwitchRole(nextRole);
-                onNavigate(nextRole === 'student' ? 'student-portal' : 'admin-triage');
-              }}
+              onClick={() => onRequestLogin(activeRole === 'student' ? 'student' : 'admin')}
               className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-300 ring-2 ring-slate-100 flex-shrink-0 cursor-pointer block hover:ring-indigo-300 transition-all"
-              title={`Logged in as ${activeRole === 'student' ? 'Alex Chen (Student)' : 'Campus Facilities Admin'}. Click to toggle role.`}
+              title={`Logged in: ${currentUser?.id || activeRole}. Click to re-authenticate or switch.`}
             >
               <img
                 alt="User Avatar"
@@ -127,6 +135,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-600 border-2 border-white rounded-full"></span>
           </div>
+
+          {/* Logout / Switch Role Button */}
+          <button
+            onClick={onLogout}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            title="Log out / Switch role"
+          >
+            <span className="material-symbols-outlined text-[19px]">logout</span>
+          </button>
         </div>
       </div>
 
@@ -139,7 +156,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-slate-300">/</span>
             <span>DETERMINISTIC PRIORITY ENGINE v2.4</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600 font-semibold uppercase">ACTIVE ROLE: {activeRole.toUpperCase()}</span>
+            <span className="text-slate-700 font-semibold uppercase">
+              ACTIVE ID: {currentUser ? currentUser.id : activeRole.toUpperCase()}
+            </span>
           </div>
           <div className="flex items-center space-x-2 text-slate-600">
             <span>SECURE INSTANCE: UNIVERSITY-WIDE SSO</span>

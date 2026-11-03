@@ -1,10 +1,13 @@
-export type CategoryType = 'Wi-Fi' | 'Hostel' | 'Classroom' | 'Laboratory';
+export type CategoryType = 'Wi-Fi' | 'Hostel' | 'Classroom' | 'Laboratory' | 'Other';
 
 export type StatusType = 'Raised' | 'In Progress' | 'Resolved';
 
 export interface Complaint {
   id: string;
   category: CategoryType;
+  otherCategory?: string;
+  studentName?: string;
+  enrollmentNo?: string;
   desc: string;
   location: string;
   hoursPending: number;

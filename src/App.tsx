@@ -13,8 +13,10 @@ import { AdminTriageView } from './components/AdminTriageView';
 import { RaiseComplaintModal } from './components/RaiseComplaintModal';
 import { TicketDetailModal } from './components/TicketDetailModal';
 import { BottomNav } from './components/BottomNav';
+import { AuthLoginModal, AuthRole } from './components/AuthLoginModal';
 
 const STORAGE_KEY = 'campuspulse_facility_complaints_v2';
+const USER_KEY = 'campuspulse_auth_user_v2';
 
 export default function App() {
   const [complaints, setComplaints] = useState<Complaint[]>(() => {
@@ -32,13 +34,25 @@ export default function App() {
     return INITIAL_COMPLAINTS;
   });
 
+  // Current logged in user info
+  const [currentUser, setCurrentUser] = useState<{ id: string; name: string } | null>(() => {
+    try {
+      const savedUser = localStorage.getItem(USER_KEY);
+      if (savedUser) return JSON.parse(savedUser);
+    } catch {
+      // Ignore
+    }
+    return { id: 'ENR-2024-8841', name: 'Alex Chen' };
+  });
+
   const [currentView, setCurrentView] = useState<ViewMode>('student-portal');
   const [activeRole, setActiveRole] = useState<'student' | 'admin'>('student');
   const [isRaiseModalOpen, setIsRaiseModalOpen] = useState(false);
+  const [authModalRole, setAuthModalRole] = useState<AuthRole | null>(null);
   const [selectedTicket, setSelectedTicket] = useState<Complaint | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Sync to local storage
+  // Sync complaints to local storage
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(complaints));
@@ -46,6 +60,19 @@ export default function App() {
       // Handle storage quota if any
     }
   }, [complaints]);
+
+  // Sync user to local storage
+  useEffect(() => {
+    try {
+      if (currentUser) {
+        localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+      } else {
+        localStorage.removeItem(USER_KEY);
+      }
+    } catch {
+      // Ignore
+    }
+  }, [currentUser]);
 
   // Compute next ticket ID: format "C" + 2 digits (e.g. C29)
   const nextId = React.useMemo(() => {
@@ -65,12 +92,20 @@ export default function App() {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
-    }, 3200);
+    }, 3400);
   };
 
   const handleCreateComplaint = (newTicket: Complaint) => {
-    setComplaints((prev) => [newTicket, ...prev]);
-    showToast(`Ticket ${newTicket.id} logged with Urgency Score ${newTicket.score.toFixed(1)}`);
+    const personalizedTicket: Complaint = {
+      ...newTicket,
+      reportedBy: newTicket.studentName
+        ? `${newTicket.studentName} (${newTicket.enrollmentNo || 'Student'})`
+        : currentUser
+        ? `${currentUser.name} (${currentUser.id})`
+        : 'Student User',
+    };
+    setComplaints((prev) => [personalizedTicket, ...prev]);
+    showToast(`Ticket ${personalizedTicket.id} logged with Urgency Score ${personalizedTicket.score.toFixed(1)}`);
   };
 
   const handleUpdateStatus = (id: string, newStatus: StatusType) => {
@@ -105,9 +140,28 @@ export default function App() {
     showToast(`Ticket ${id} status updated to ${newStatus}`);
   };
 
-  const handleRoleSelection = (role: 'student' | 'admin', view: ViewMode) => {
+  // Called when user clicks "LOGIN AS STUDENT" or "LOGIN AS ADMINISTRATOR" in Role Selection
+  const handleRequestLogin = (role: AuthRole) => {
+    setAuthModalRole(role);
+  };
+
+  // Called when login is successfully completed in AuthLoginModal
+  const handleLoginSuccess = (role: AuthRole, userDetails: { id: string; name: string }) => {
+    setCurrentUser(userDetails);
     setActiveRole(role);
-    setCurrentView(view);
+    if (role === 'student') {
+      setCurrentView('student-portal');
+      showToast(`Welcome ${userDetails.name}! Authenticated with Enrollment No: ${userDetails.id}`);
+    } else {
+      setCurrentView('admin-triage');
+      showToast(`Welcome Administrator! Authenticated with Staff ID: ${userDetails.id}`);
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setCurrentView('role-selection');
+    showToast('Signed out of campus session. Select your role to login.');
   };
 
   const pendingComplaintsCount = complaints.filter((c) => c.status === 'Raised').length;
@@ -118,16 +172,22 @@ export default function App() {
       <Navbar
         currentView={currentView}
         onNavigate={setCurrentView}
+        onRequestLogin={handleRequestLogin}
         onOpenRaiseModal={() => setIsRaiseModalOpen(true)}
         activeRole={activeRole}
-        onSwitchRole={setActiveRole}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+        onSwitchRole={(role) => {
+          setActiveRole(role);
+          setCurrentView(role === 'student' ? 'student-portal' : 'admin-triage');
+        }}
       />
 
       {/* Main View Router */}
       <div className="flex-1 flex flex-col">
         {currentView === 'role-selection' && (
           <RoleSelectionView
-            onSelectRole={handleRoleSelection}
+            onRequestLogin={handleRequestLogin}
             totalComplaints={complaints.length}
             pendingCount={pendingComplaintsCount}
           />
@@ -155,7 +215,16 @@ export default function App() {
       <BottomNav
         currentView={currentView}
         onNavigate={setCurrentView}
+        onRequestLogin={handleRequestLogin}
         onOpenRaiseModal={() => setIsRaiseModalOpen(true)}
+      />
+
+      {/* Modal: Student & Administrator Authentication */}
+      <AuthLoginModal
+        isOpen={authModalRole !== null}
+        role={authModalRole}
+        onClose={() => setAuthModalRole(null)}
+        onSuccess={handleLoginSuccess}
       />
 
       {/* Modal: Raise Complaint */}
@@ -164,6 +233,7 @@ export default function App() {
         onClose={() => setIsRaiseModalOpen(false)}
         onSubmit={handleCreateComplaint}
         nextId={nextId}
+        currentStudent={currentUser}
       />
 
       {/* Modal: Ticket Details & Timeline */}
@@ -171,6 +241,7 @@ export default function App() {
         ticket={selectedTicket}
         onClose={() => setSelectedTicket(null)}
         onUpdateStatus={handleUpdateStatus}
+        isAdministrator={currentView === 'admin-triage' || activeRole === 'admin'}
       />
 
       {/* Floating System Toast */}

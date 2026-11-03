@@ -5,6 +5,7 @@ interface TicketDetailModalProps {
   ticket: Complaint | null;
   onClose: () => void;
   onUpdateStatus: (id: string, status: StatusType) => void;
+  isAdministrator?: boolean;
   onSignOff?: (id: string) => void;
 }
 
@@ -12,14 +13,17 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
   ticket,
   onClose,
   onUpdateStatus,
-  onSignOff,
+  isAdministrator = false,
 }) => {
   if (!ticket) return null;
 
   const hoursDays = Math.floor(ticket.hoursPending / 24);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn"
+      onClick={onClose}
+    >
       <div
         className="bg-white rounded-xl border border-slate-200/90 shadow-xl w-full max-w-lg overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
@@ -51,7 +55,7 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors"
+            className="w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
@@ -69,7 +73,7 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
                 <span>{ticket.location}</span>
               </div>
               <span>•</span>
-              <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-1 font-mono">
                 <span className="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
                 <span>{ticket.hoursPending}h pending</span>
               </div>
@@ -105,62 +109,115 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
           {/* Operational Meta */}
           <div className="grid grid-cols-2 gap-2 text-[11px]">
             <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-              <span className="text-slate-400 block uppercase text-[10px]">Reported By</span>
-              <span className="font-semibold text-slate-800">{ticket.reportedBy}</span>
+              <span className="text-slate-400 block uppercase text-[10px]">Student / Reporter</span>
+              <span className="font-semibold text-slate-800">
+                {ticket.studentName || ticket.reportedBy}
+              </span>
+              {ticket.enrollmentNo && (
+                <span className="text-[10px] text-slate-500 font-mono block mt-0.5">
+                  Enr: {ticket.enrollmentNo}
+                </span>
+              )}
             </div>
             <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-              <span className="text-slate-400 block uppercase text-[10px]">Assigned Unit</span>
-              <span className="font-semibold text-slate-800">{ticket.assignedTeam || 'Facilities Dispatch'}</span>
+              <span className="text-slate-400 block uppercase text-[10px]">Category &amp; Dispatch</span>
+              <span className="font-semibold text-slate-800">
+                {ticket.otherCategory ? `${ticket.category} (${ticket.otherCategory})` : ticket.category}
+              </span>
+              <span className="text-[10px] text-slate-500 font-mono block mt-0.5">
+                {ticket.assignedTeam || 'Facilities Dispatch'}
+              </span>
             </div>
           </div>
 
-          {/* Status Quick Control */}
-          <div className="pt-2 border-t border-slate-200">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
-              Action Status Control
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                onClick={() => onUpdateStatus(ticket.id, 'Raised')}
-                className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all ${
-                  ticket.status === 'Raised'
-                    ? 'bg-rose-50 text-rose-700 border-rose-300 ring-2 ring-rose-200'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                Mark Raised
-              </button>
-              <button
-                onClick={() => onUpdateStatus(ticket.id, 'In Progress')}
-                className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all ${
-                  ticket.status === 'In Progress'
-                    ? 'bg-amber-50 text-amber-700 border-amber-300 ring-2 ring-amber-200'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                In Progress
-              </button>
-              <button
-                onClick={() => onUpdateStatus(ticket.id, 'Resolved')}
-                className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all ${
-                  ticket.status === 'Resolved'
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-300 ring-2 ring-emerald-200'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                Mark Resolved
-              </button>
+          {/* CONDITIONAL ACTION STATUS CONTROL:
+              Only visible to Administrators.
+              In the Student Portal, students CANNOT mark complaints as completed, in progress, or raised. */}
+          {isAdministrator ? (
+            <div className="pt-2 border-t border-slate-200">
+              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
+                Administrator Action Status Control
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => onUpdateStatus(ticket.id, 'Raised')}
+                  className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all cursor-pointer ${
+                    ticket.status === 'Raised'
+                      ? 'bg-rose-50 text-rose-700 border-rose-300 ring-2 ring-rose-200'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  Mark Raised
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onUpdateStatus(ticket.id, 'In Progress')}
+                  className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all cursor-pointer ${
+                    ticket.status === 'In Progress'
+                      ? 'bg-amber-50 text-amber-700 border-amber-300 ring-2 ring-amber-200'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  In Progress
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onUpdateStatus(ticket.id, 'Resolved')}
+                  className={`py-2 px-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider border transition-all cursor-pointer ${
+                    ticket.status === 'Resolved'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-300 ring-2 ring-emerald-200'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  Mark Resolved
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            /* Student View: Read-Only Incident Tracking Status */
+            <div className="pt-2 border-t border-slate-200 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">
+                  Live Incident Tracking
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono">
+                  Read-Only • Managed by Dispatch
+                </span>
+              </div>
+              <div className="p-3 rounded-lg border bg-slate-50 border-slate-200/90 flex items-start space-x-2.5">
+                <span
+                  className={`w-2.5 h-2.5 rounded-full mt-1 shrink-0 ${
+                    ticket.status === 'Resolved'
+                      ? 'bg-emerald-600'
+                      : ticket.status === 'In Progress'
+                      ? 'bg-amber-500 animate-pulse'
+                      : 'bg-rose-500 animate-pulse'
+                  }`}
+                />
+                <div className="flex-1">
+                  <p className="font-bold text-xs text-slate-800">
+                    {ticket.status === 'Raised' && 'Status: Raised (Awaiting Maintenance Dispatch)'}
+                    {ticket.status === 'In Progress' &&
+                      `Status: In Progress — Assigned to ${ticket.assignedTeam || 'Facilities Team'}`}
+                    {ticket.status === 'Resolved' && 'Status: Successfully Resolved by Facilities Team'}
+                  </p>
+                  <p className="text-[11px] text-slate-500 font-mono mt-0.5">
+                    Ticket status updates are authoritative and managed exclusively by Facilities &amp; NOC administrators.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
-          {/* Student Sign-off verification */}
+          {/* Audit Sign-off info for resolved complaints */}
           {ticket.status === 'Resolved' && (
             <div className="p-3 bg-emerald-50/80 border border-emerald-200 rounded-lg flex items-center justify-between">
               <div className="flex items-center space-x-2 text-emerald-800">
                 <span className="material-symbols-outlined text-[18px]">verified</span>
                 <div>
                   <p className="font-bold text-[11px]">Audit Sign-off Verified</p>
-                  <p className="text-[10px] text-emerald-700">Student digital closure token confirmed</p>
+                  <p className="text-[10px] text-emerald-700">Digital closure signature confirmed by student registry</p>
                 </div>
               </div>
               <span className="text-[10px] font-mono bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">
@@ -173,8 +230,9 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
         {/* Footer */}
         <div className="px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-end">
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs uppercase tracking-wider"
+            className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs uppercase tracking-wider cursor-pointer"
           >
             Close
           </button>

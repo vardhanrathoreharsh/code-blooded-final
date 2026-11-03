@@ -306,7 +306,7 @@ export const AdminTriageView: React.FC<AdminTriageViewProps> = ({
 
           {/* Category Filter Pills (Horizontal Scroll) */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs font-mono">
-            {(['All', 'Wi-Fi', 'Hostel', 'Classroom', 'Laboratory'] as const).map((cat) => (
+            {(['All', 'Wi-Fi', 'Hostel', 'Classroom', 'Laboratory', 'Other'] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

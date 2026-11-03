@@ -211,7 +211,7 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
 
           {/* Filter Tags */}
           <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs font-mono">
-            {(['All', 'Wi-Fi', 'Hostel', 'Classroom', 'Laboratory'] as const).map((cat) => (
+            {(['All', 'Wi-Fi', 'Hostel', 'Classroom', 'Laboratory', 'Other'] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}

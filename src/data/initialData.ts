@@ -5,6 +5,7 @@ export const CATEGORY_WEIGHTS: Record<CategoryType, number> = {
   'Wi-Fi': 2,
   Hostel: 2,
   Classroom: 1,
+  Other: 1,
 };
 
 export function calculateUrgencyScore(category: CategoryType, hoursPending: number): number {

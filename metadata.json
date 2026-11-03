@@ -2,5 +2,7 @@
   "name": "CampusPulse - Campus Facility Operations & Triage",
   "description": "Deterministic urgency triage engine and campus facility incident tracker for students and administrators.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

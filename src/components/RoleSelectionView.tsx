@@ -2,13 +2,13 @@ import React from 'react';
 import { ViewMode } from '../types';
 
 interface RoleSelectionViewProps {
-  onSelectRole: (role: 'student' | 'admin', view: ViewMode) => void;
+  onRequestLogin: (role: 'student' | 'admin') => void;
   totalComplaints: number;
   pendingCount: number;
 }
 
 export const RoleSelectionView: React.FC<RoleSelectionViewProps> = ({
-  onSelectRole,
+  onRequestLogin,
   totalComplaints,
   pendingCount,
 }) => {
@@ -163,8 +163,8 @@ export const RoleSelectionView: React.FC<RoleSelectionViewProps> = ({
           {/* Action & Metadata Footer */}
           <div>
             <button
-              onClick={() => onSelectRole('student', 'student-portal')}
-              className="w-full bg-[#11243e] hover:bg-[#0b1728] text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors shadow-sm mb-3 group"
+              onClick={() => onRequestLogin('student')}
+              className="w-full bg-[#11243e] hover:bg-[#0b1728] text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors shadow-sm mb-3 group cursor-pointer"
               type="button"
             >
               <span className="tracking-wide text-xs sm:text-sm font-semibold uppercase">LOGIN AS STUDENT</span>
@@ -279,8 +279,8 @@ export const RoleSelectionView: React.FC<RoleSelectionViewProps> = ({
           {/* Action & Metadata Footer */}
           <div>
             <button
-              onClick={() => onSelectRole('admin', 'admin-triage')}
-              className="w-full bg-blue-900 hover:bg-[#0b1728] text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors shadow-sm mb-3 group"
+              onClick={() => onRequestLogin('admin')}
+              className="w-full bg-blue-900 hover:bg-[#0b1728] text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors shadow-sm mb-3 group cursor-pointer"
               type="button"
             >
               <span className="tracking-wide text-xs sm:text-sm font-semibold uppercase">LOGIN AS ADMINISTRATOR</span>
