@@ -19,6 +19,7 @@ export interface Complaint {
   assignedTeam?: string;
   priorityTag?: string;
   studentSignOff?: boolean;
+  upvotes?: number;
 }
 
 export type ViewMode = 'role-selection' | 'student-portal' | 'admin-triage';

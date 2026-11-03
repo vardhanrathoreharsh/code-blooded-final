@@ -52,6 +52,16 @@ export default function App() {
   const [selectedTicket, setSelectedTicket] = useState<Complaint | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Track voted tickets by current student
+  const VOTES_KEY = 'campuspulse_voted_tickets_v2';
+  const [votedTicketIds, setVotedTicketIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem(VOTES_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return ['C01'];
+  });
+
   // Sync complaints to local storage
   useEffect(() => {
     try {
@@ -73,6 +83,13 @@ export default function App() {
       // Ignore
     }
   }, [currentUser]);
+
+  // Sync votes to local storage
+  useEffect(() => {
+    try {
+      localStorage.setItem(VOTES_KEY, JSON.stringify(votedTicketIds));
+    } catch {}
+  }, [votedTicketIds]);
 
   // Compute next ticket ID: format "C" + 2 digits (e.g. C29)
   const nextId = React.useMemo(() => {
@@ -158,6 +175,40 @@ export default function App() {
     }
   };
 
+  const handleToggleVote = (ticketId: string) => {
+    const isVoted = votedTicketIds.includes(ticketId);
+    const nextVoted = isVoted
+      ? votedTicketIds.filter((id) => id !== ticketId)
+      : [...votedTicketIds, ticketId];
+    setVotedTicketIds(nextVoted);
+
+    setComplaints((prev) =>
+      prev.map((c) => {
+        if (c.id === ticketId) {
+          const currentVotes = c.upvotes ?? 0;
+          return {
+            ...c,
+            upvotes: isVoted ? Math.max(0, currentVotes - 1) : currentVotes + 1,
+          };
+        }
+        return c;
+      })
+    );
+
+    setSelectedTicket((prev) => {
+      if (prev && prev.id === ticketId) {
+        const currentVotes = prev.upvotes ?? 0;
+        return {
+          ...prev,
+          upvotes: isVoted ? Math.max(0, currentVotes - 1) : currentVotes + 1,
+        };
+      }
+      return prev;
+    });
+
+    showToast(isVoted ? `Vote withdrawn for ticket ${ticketId}` : `Endorsed ticket ${ticketId} (+1 vote)`);
+  };
+
   const handleLogout = () => {
     setCurrentUser(null);
     setCurrentView('role-selection');
@@ -198,6 +249,9 @@ export default function App() {
             complaints={complaints}
             onOpenRaiseModal={() => setIsRaiseModalOpen(true)}
             onSelectTicket={(ticket) => setSelectedTicket(ticket)}
+            onToggleVote={handleToggleVote}
+            votedTicketIds={votedTicketIds}
+            currentUser={currentUser}
           />
         )}
 
@@ -242,6 +296,8 @@ export default function App() {
         onClose={() => setSelectedTicket(null)}
         onUpdateStatus={handleUpdateStatus}
         isAdministrator={currentView === 'admin-triage' || activeRole === 'admin'}
+        onToggleVote={handleToggleVote}
+        isVoted={selectedTicket ? votedTicketIds.includes(selectedTicket.id) : false}
       />
 
       {/* Floating System Toast */}

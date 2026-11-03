@@ -7,6 +7,8 @@ interface TicketDetailModalProps {
   onUpdateStatus: (id: string, status: StatusType) => void;
   isAdministrator?: boolean;
   onSignOff?: (id: string) => void;
+  onToggleVote?: (id: string) => void;
+  isVoted?: boolean;
 }
 
 export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
@@ -14,10 +16,13 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
   onClose,
   onUpdateStatus,
   isAdministrator = false,
+  onToggleVote,
+  isVoted = false,
 }) => {
   if (!ticket) return null;
 
   const hoursDays = Math.floor(ticket.hoursPending / 24);
+  const votes = ticket.upvotes ?? 0;
 
   return (
     <div
@@ -53,12 +58,36 @@ export const TicketDetailModal: React.FC<TicketDetailModalProps> = ({
               </div>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-[18px]">close</span>
-          </button>
+
+          <div className="flex items-center space-x-2">
+            {onToggleVote && (
+              <button
+                type="button"
+                onClick={() => onToggleVote(ticket.id)}
+                className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all border cursor-pointer ${
+                  isVoted
+                    ? 'bg-[#102a43] text-white border-[#102a43] shadow-xs'
+                    : 'bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-900 border-slate-300'
+                }`}
+                title={isVoted ? 'Withdraw your vote' : 'Endorse: this issue affects me too'}
+              >
+                <span className="material-symbols-outlined text-[15px]">
+                  {isVoted ? 'thumb_up' : 'thumb_up_off_alt'}
+                </span>
+                <span>{votes}</span>
+                <span className="text-[10px] font-normal hidden sm:inline">
+                  {isVoted ? 'Voted' : 'Vote'}
+                </span>
+              </button>
+            )}
+
+            <button
+              onClick={onClose}
+              className="w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[18px]">close</span>
+            </button>
+          </div>
         </div>
 
         {/* Content */}

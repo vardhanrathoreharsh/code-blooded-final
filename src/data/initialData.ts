@@ -27,7 +27,8 @@ export const INITIAL_COMPLAINTS: Complaint[] = [
     createdAt: '72h ago',
     reportedBy: 'Alex Chen (Student)',
     assignedTeam: 'Classroom AV Ops',
-    priorityTag: 'Oldest Submission Priority'
+    priorityTag: 'Oldest Submission Priority',
+    upvotes: 52
   },
   {
     id: 'C01',
@@ -41,7 +42,8 @@ export const INITIAL_COMPLAINTS: Complaint[] = [
     createdAt: '48h ago',
     reportedBy: 'Devon Vance (Student)',
     assignedTeam: 'Network NOC',
-    priorityTag: 'High Impact'
+    priorityTag: 'High Impact',
+    upvotes: 68
   },
   {
     id: 'C02',
@@ -55,7 +57,8 @@ export const INITIAL_COMPLAINTS: Complaint[] = [
     createdAt: '8h ago',
     reportedBy: 'Sara Lin (Student)',
     assignedTeam: 'Electricians Alpha',
-    priorityTag: 'Normal Escalation'
+    priorityTag: 'Normal Escalation',
+    upvotes: 34
   },
   {
     id: 'C05',
@@ -69,7 +72,8 @@ export const INITIAL_COMPLAINTS: Complaint[] = [
     createdAt: '4h ago',
     reportedBy: 'Marcus Brody (Student)',
     assignedTeam: 'Facilities Maintenance',
-    priorityTag: 'Normal Escalation'
+    priorityTag: 'Normal Escalation',
+    upvotes: 27
   },
   {
     id: 'C04',
@@ -83,7 +87,8 @@ export const INITIAL_COMPLAINTS: Complaint[] = [
     createdAt: '96h ago (Closed)',
     reportedBy: 'Dr. Anita Ray (Faculty/Lab)',
     assignedTeam: 'Precision Tech Field Services',
-    priorityTag: 'Resolved'
+    priorityTag: 'Resolved',
+    upvotes: 19
   },
   // Additional system complaints across campus to populate the 28 total tickets
   {
