@@ -1,0 +1,717 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f8fafc;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.portal-shadow{box-shadow:0 1px 3px rgba(15,23,42,0.08),0 1px 2px rgba(15,23,42,0.04);}.portal-shadow-sm{box-shadow:0 1px 2px rgba(15,23,42,0.05);}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "canvas-raw": "#f8fafc",
+        "surface": "#f8fafc",
+        "surface-card": "#ffffff",
+        "primary": "#1e3a8a",
+        "primary-container": "#2563eb",
+        "on-primary": "#ffffff",
+        "on-surface": "#0f172a",
+        "on-surface-variant": "#334155",
+        "text-muted": "#64748B",
+        "surface-container": "#f1f5f9",
+        "surface-container-low": "#f8fafc",
+        "surface-container-high": "#e2e8f0",
+        "surface-container-highest": "#cbd5e1",
+        "surface-container-lowest": "#ffffff",
+        "error": "#dc2626",
+        "error-container": "#fee2e2",
+        "on-error-container": "#991b1b",
+        "accent-amber": "#d97706",
+        "tertiary": "#059669",
+        "tertiary-container": "#d1fae5",
+        "on-tertiary-container": "#065f46",
+        "primary-fixed": "#dbeafe",
+        "on-primary-fixed": "#1e3a8a",
+        "secondary-fixed": "#fef3c7",
+        "on-secondary-fixed": "#92400e",
+        "secondary": "#2563eb",
+        "border-subtle": "#e2e8f0",
+        "border-strong": "#cbd5e1"
+      },
+      borderRadius: {
+        "DEFAULT": "0.375rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "2xl": "1rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-xl": "2rem",
+        "gutter": "1.5rem",
+        "margin-mobile": "1rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "gutter-mobile": "1rem",
+        "margin": "2rem",
+        "space-2xl": "3rem",
+        "space-lg": "1.5rem"
+      },
+      fontFamily: {
+        "display-hero": ["Cinzel", "serif"],
+        "headline-lg": ["Cinzel", "serif"],
+        "headline-lg-mobile": ["Cinzel", "serif"],
+        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-md": ["Cinzel", "serif"],
+        "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "label-code": ["JetBrains Mono", "monospace"],
+        "label-badge": ["Plus Jakarta Sans", "sans-serif"]
+      }
+    }
+  }
+};</script></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-[#dbeafe] selection:text-[#1e3a8a]"><header class="fixed top-0 w-full z-50 pt-safe bg-white border-b border-border-subtle portal-shadow-sm"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="CampusPulse Logo" class="h-8 w-auto object-contain shrink-0 border border-border-subtle rounded bg-white p-0.5" src="https://lh3.googleusercontent.com/aida/AEtjO1WEuFYt0Qx1R4uRItrnC0SvuM-rhc88cIB1wq5zGBlzKWj21RcYXF8I8DnXZFJm4pXGeZs1I9r2y7FVl7ktEbUp5O5ICaMD4Wzb37IcHdcUFbrfQXBgbfs6sk1aGKI99RpqwXg8D2urZ-ngDNC4xurC7ApiGhHkInyQMFHaVpmu0OlV-BMeVsRxp6_8k2Kg_9GmsMg6yRGrlwXTCbn5Lna2wYpg9wGJ0aOKBoLtGAzY"><div class="flex items-center gap-1.5 min-w-0"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary uppercase truncate">Campus Resolve</span><span class="font-label-badge text-[11px] bg-[#eef2ff] text-primary border border-border-strong rounded px-1.5 py-0.5 font-bold uppercase shrink-0">Ops</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded border border-border-subtle bg-surface-container-low portal-shadow-sm"><span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span><span class="font-label-code text-[11px] text-[#475569] font-medium hidden sm:inline">Local Persistence Active</span></div><div class="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-border-strong bg-[#eff6ff]"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy_TQi9iaQNCMli7RaiKHkS79TiCBSk-q-QClmIpueOb7AtnVmZhiMQeWCh639avx9l52zQTz2zEzujSvwNCHH2k9fzn3pIAcG9m7JzgmiFy4QSp8Zb0C7FUh3hcRCwrvjLRHTCVrSI05QL396iy2WbOxuRC55zlCWlMBl0bpT_bJ0_pKo-cMu55RiyaVLBYIIAXIhvb9y9CKIKpipzCLrrQHS4ef5LxHrGjYwl9Pf"></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface"><div class="flex flex-col w-full relative">
+<!-- Interactive Dot Grid Canvas Background Emulation -->
+<div class="px-gutter-mobile py-space-sm flex flex-col gap-space-md">
+<!-- 1. Header Sub-bar: Campus Operations Status & Quick Action -->
+<div class="flex items-center justify-between gap-space-xs bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-strong bg-surface-container-low shrink-0">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 absolute ml-0.25"></span>
+<span class="font-label-code text-[11px] text-on-surface-variant font-semibold">Ops Active</span>
+</div>
+<span class="font-body-sm text-[12px] text-text-muted truncate hidden min-[370px]:inline">Node Engine v2.4</span>
+</div>
+<button class="flex items-center gap-1.5 bg-primary hover:bg-[#1e293b] text-white font-headline-sm text-label-badge uppercase tracking-wider px-3.5 py-1.5 rounded border border-primary shadow-sm active:scale-95 transition-all shrink-0 font-semibold" id="open-ticket-drawer-btn"><span class="material-symbols-outlined text-[16px] font-semibold">add</span><span class="">Raise Complain</span></button>
+</div>
+<!-- 2. 4 Minimalist Metric Stat Cards (2x2 Grid) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Card 1: Total -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-text-muted">Total Load</span>
+<span class="font-label-code text-[11px] bg-[#eff6ff] text-primary border border-[#bfdbfe] font-semibold px-1.5 py-0.5 rounded">+12%</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-display-hero text-[1.75rem] font-bold text-on-surface" id="stat-total">4</span>
+<span class="font-body-sm text-[12px] text-text-muted">complaints</span>
+</div>
+<div class="mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[14px]">insights</span>
+<span class="font-label-code text-[11px] text-text-muted">Sync healthy</span>
+</div>
+</div>
+<!-- Card 2: Pending / Unresolved -->
+<div class="bg-[#fef2f2] p-space-sm rounded-xl border border-[#fecaca] portal-shadow flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-error">Pending</span>
+<span class="font-label-code text-[11px] bg-error-container text-on-error-container border border-[#fca5a5] font-bold uppercase px-1.5 py-0.5 rounded">Urgent</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-display-hero text-[1.75rem] font-bold text-error" id="stat-pending">1</span>
+<span class="font-body-sm text-[12px] text-text-muted">actionable</span>
+</div>
+<div class="mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[14px]">warning</span>
+<span class="font-label-code text-[11px] text-error font-medium">Over SLA limit</span>
+</div>
+</div>
+<!-- Card 3: In Progress -->
+<div class="bg-[#fffbeb] p-space-sm rounded-xl border border-[#fde68a] portal-shadow flex flex-col justify-between relative">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-accent-amber">In Progress</span>
+<span class="font-label-code text-[11px] bg-secondary-fixed text-on-secondary-fixed border border-[#fcd34d] font-semibold px-1.5 py-0.5 rounded">In Progress</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-display-hero text-[1.75rem] font-bold text-on-surface" id="stat-progress">2</span>
+<span class="font-body-sm text-[12px] text-text-muted">assigned</span>
+</div>
+<div class="mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-accent-amber text-[14px]">cached</span>
+<span class="font-label-code text-[11px] text-text-muted">~2.4h avg cycle</span>
+</div>
+</div>
+<!-- Card 4: Resolved -->
+<div class="bg-[#f0fdf4] p-space-sm rounded-xl border border-[#a7f3d0] portal-shadow flex flex-col justify-between relative">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-tertiary">Resolved</span>
+<span class="font-label-code text-[11px] bg-tertiary-container text-on-tertiary-container border border-[#6ee7b7] font-semibold px-1.5 py-0.5 rounded">Done</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-display-hero text-[1.75rem] font-bold text-tertiary" id="stat-resolved">1</span>
+<span class="font-body-sm text-[12px] text-text-muted">closed</span>
+</div>
+<div class="mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]">check_circle</span>
+<span class="font-label-code text-[11px] text-tertiary font-medium">94.2% rate</span>
+</div>
+</div>
+</div>
+<!-- 3. Analytical Priority Section ('High-Urgency Unresolved Queue') -->
+<div class="flex flex-col gap-space-xs p-3.5 border border-border-strong rounded-xl bg-surface-container portal-shadow">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center shrink-0 text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<h2 class="font-headline-sm text-headline-sm font-bold uppercase tracking-tight text-on-surface">HIGH-PRIORITY UNRESOLVED QUEUE</h2>
+<span class="px-1.5 py-0.5 text-label-badge text-[10px] rounded bg-primary text-white font-bold uppercase">Top 3</span>
+</div>
+<p class="font-label-code text-[11px] text-[#475569] font-medium mt-1 leading-snug">
+Urgency Score = Category Weight (Lab: 3, Wi-Fi: 2, Hostel: 2, Classroom: 1) + floor(Hours Pending / 24)
+</p>
+</div>
+</div>
+<!-- Spotlight Cards Stack -->
+<div class="flex flex-col gap-space-xs mt-2" id="spotlight-container">
+<!-- Priority Card 1 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 relative">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C03</span>
+<span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Lab (+3)</span>
+</div>
+<span class="font-label-badge text-[11px] bg-error-container text-on-error-container border border-[#fca5a5] px-2 py-0.5 rounded font-bold uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+              Score: 4.0 · Critical
+            </span>
+</div>
+<div class="flex flex-col">
+<p class="font-body-md text-body-md font-semibold text-on-surface">Centrifuge unit 4 error code E-12</p>
+<div class="flex items-center justify-between text-text-muted mt-1">
+<span class="font-body-sm text-[12px] flex items-center gap-1 text-error font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 72h pending
+              </span>
+<span class="font-label-code text-[11px] text-text-muted truncate">Tie-Breaker: Earliest Submission</span>
+</div>
+</div>
+<div class="pt-1 flex items-center justify-between gap-2">
+<span class="font-label-badge text-[11px] bg-surface-container-low text-text-muted border border-border-subtle px-2 py-0.5 rounded font-medium uppercase">Pending Tech</span>
+<button class="flex items-center gap-1 bg-primary text-white font-label-badge text-[11px] font-semibold uppercase px-3 py-1 rounded shadow-sm hover:bg-[#1e293b] active:scale-95 transition-transform ml-auto" onclick="advanceCard('C03')">
+<span class="">Advance Status</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Priority Card 2 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 relative">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C01</span>
+<span class="font-label-badge text-[11px] bg-[#eef2ff] text-[#312e81] border border-[#c7d2fe] px-2 py-0.5 rounded font-semibold uppercase">Wi-Fi (+2)</span>
+</div>
+<span class="font-label-badge text-[11px] bg-[#fef3c7] text-[#92400e] border border-[#fde68a] px-2 py-0.5 rounded font-bold uppercase">
+              Score: 3.5 · High
+            </span>
+</div>
+<div class="flex flex-col">
+<p class="font-body-md text-body-md font-semibold text-on-surface">5GHz AP drops in Block B 3rd fl.</p>
+<div class="flex items-center justify-between text-text-muted mt-1">
+<span class="font-body-sm text-[12px] flex items-center gap-1 text-accent-amber font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 36h pending
+              </span>
+<span class="font-label-code text-[11px] text-text-muted">Network Gateway 04</span>
+</div>
+</div>
+<div class="pt-1 flex items-center justify-between gap-2">
+<span class="font-label-badge text-[11px] bg-surface-container-low text-text-muted border border-border-subtle px-2 py-0.5 rounded font-medium uppercase">Infra Unassigned</span>
+<button class="flex items-center gap-1 bg-surface-container-high text-on-surface hover:bg-surface-container-highest border border-border-strong font-label-badge text-[11px] font-semibold uppercase px-3 py-1 rounded active:scale-95 transition-transform ml-auto" onclick="advanceCard('C01')">
+<span class="">Advance Status</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Priority Card 3 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 relative">
+<div class="flex items-center justify-between gap-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C07</span>
+<span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Hostel (+2)</span>
+</div>
+<span class="font-label-badge text-[11px] bg-surface-container-low text-text-muted border border-border-subtle px-2 py-0.5 rounded font-bold uppercase">
+              Score: 2.8 · Moderate
+            </span>
+</div>
+<div class="flex flex-col">
+<p class="font-body-md text-body-md font-semibold text-on-surface">Water leakage in Wing C bathroom</p>
+<div class="flex items-center justify-between text-text-muted mt-1">
+<span class="font-body-sm text-[12px] flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 20h pending
+              </span>
+<span class="font-label-code text-[11px] text-text-muted">Facilities Team</span>
+</div>
+</div>
+<div class="pt-1 flex items-center justify-between gap-2">
+<span class="font-label-badge text-[11px] bg-surface-container-low text-text-muted border border-border-subtle px-2 py-0.5 rounded font-medium uppercase">Pending Review</span>
+<button class="flex items-center gap-1 bg-surface-container-high text-on-surface hover:bg-surface-container-highest border border-border-strong font-label-badge text-[11px] font-semibold uppercase px-3 py-1 rounded active:scale-95 transition-transform ml-auto" onclick="advanceCard('C07')">
+<span class="">Advance Status</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Interactive Complaint Submission Drawer / Floating Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm border border-border-subtle portal-shadow flex flex-col gap-space-sm transition-all duration-300" id="new-ticket-drawer">
+<div class="flex flex-col gap-space-sm" id="drawer-body">
+<!-- Category Selector with Weighted Pills -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-badge text-[11px] font-bold uppercase tracking-wider text-text-muted">QUICK COMPLAIN</label>
+<div class="grid grid-cols-2 gap-1.5" id="category-selector-group">
+<button class="cat-pill active flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-high border border-primary text-primary text-body-sm font-semibold transition-colors" data-cat="Wi-Fi" data-weight="2" type="button">
+<span class="">Wi-Fi</span>
+<span class="font-label-code text-[11px] text-primary font-bold">+2</span>
+</button>
+<button class="cat-pill flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low border border-border-strong text-on-surface-variant text-body-sm font-medium transition-colors" data-cat="Hostel" data-weight="2" type="button">
+<span class="">Hostel</span>
+<span class="font-label-code text-[11px] font-bold">+2</span>
+</button>
+<button class="cat-pill flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low border border-border-strong text-on-surface-variant text-body-sm font-medium transition-colors" data-cat="Classroom" data-weight="1" type="button">
+<span class="">Classroom</span>
+<span class="font-label-code text-[11px] font-bold">+1</span>
+</button>
+<button class="cat-pill flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low border border-border-strong text-on-surface-variant text-body-sm font-medium transition-colors" data-cat="Laboratory" data-weight="3" type="button">
+<span class="">Laboratory</span>
+<span class="font-label-code text-[11px] text-primary font-bold">+3</span>
+</button>
+</div>
+</div>
+<!-- Description Input -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-badge text-[11px] font-bold uppercase tracking-wider text-text-muted" for="ticket-desc">Issue Specification</label>
+<span class="font-label-code text-[11px] text-text-muted" id="char-counter">0 / 250</span>
+</div>
+<textarea class="w-full bg-surface-container-low border border-border-strong text-on-surface placeholder:text-text-muted rounded-lg p-2.5 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="ticket-desc" maxlength="250" placeholder="State issue details..." rows="2"></textarea>
+</div>
+<!-- Submission Row -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5" id="validation-indicator">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-code text-[11px] text-tertiary font-semibold">Valid Input</span>
+</div>
+<button class="bg-primary hover:bg-[#1e293b] text-white font-headline-sm text-body-md font-semibold px-4 py-2 rounded border border-primary shadow-sm flex items-center gap-1.5 active:scale-95 transition-all uppercase tracking-wider" id="submit-ticket-btn"><span class="material-symbols-outlined text-[16px] font-bold">bolt</span><span class="">Raise Complain</span></button>
+</div>
+</div>
+</div>
+<!-- 5. Main Data Table & Exploration Console -->
+<div class="flex flex-col gap-space-sm mt-1">
+<!-- Search Input -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg border border-border-strong bg-white text-on-surface font-body-md text-[13px] placeholder:text-text-muted portal-shadow-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" id="queue-search" placeholder="Filter queue by ID or keyword..." type="text">
+</div>
+<!-- Category Filter Carousel (Scrollable) -->
+<!-- Status Segments Tabs -->
+<!-- Status Segments Tabs -->
+<div class="flex flex-col gap-space-xs" id="ticket-list-container">
+        <div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 transition-all hover:border-border-strong" data-id="C01">
+          <div class="flex items-center justify-between gap-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C01</span>
+              <span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Wi-Fi</span>
+              <span class="font-label-code text-[11px] text-text-muted">· 48h ago</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="cycleTicketStatus('C01')">
+                <span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-error-container text-on-error-container border border-[#fca5a5] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-error"></span>Raised</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md font-semibold text-on-surface">5GHz AP drops constantly in Block B 3rd floor corridor</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">token</span>
+              <span class="font-label-code text-[11px] text-text-muted">Urgency Score:</span>
+              <span class="font-label-code text-[11px] font-bold text-on-surface">3.0</span>
+            </div>
+            <button onclick="cycleTicketStatus('C01')" class="text-text-muted hover:text-on-surface p-1 rounded">
+              <span class="material-symbols-outlined text-[16px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+      
+        <div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 transition-all hover:border-border-strong" data-id="C02">
+          <div class="flex items-center justify-between gap-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C02</span>
+              <span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Classroom</span>
+              <span class="font-label-code text-[11px] text-text-muted">· 18h ago</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="cycleTicketStatus('C02')">
+                <span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-secondary-fixed text-on-secondary-fixed border border-[#fcd34d] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-spin"></span>In Progress</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md font-semibold text-on-surface">Projector lamp flickering in Hall 102 during lectures</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">token</span>
+              <span class="font-label-code text-[11px] text-text-muted">Urgency Score:</span>
+              <span class="font-label-code text-[11px] font-bold text-on-surface">1.0</span>
+            </div>
+            <button onclick="cycleTicketStatus('C02')" class="text-text-muted hover:text-on-surface p-1 rounded">
+              <span class="material-symbols-outlined text-[16px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+      
+        <div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 transition-all hover:border-border-strong" data-id="C03">
+          <div class="flex items-center justify-between gap-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C03</span>
+              <span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Laboratory</span>
+              <span class="font-label-code text-[11px] text-text-muted">· 72h ago</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="cycleTicketStatus('C03')">
+                <span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-secondary-fixed text-on-secondary-fixed border border-[#fcd34d] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-spin"></span>In Progress</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md font-semibold text-on-surface">Centrifuge unit 4 displaying error code E-12</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">token</span>
+              <span class="font-label-code text-[11px] text-text-muted">Urgency Score:</span>
+              <span class="font-label-code text-[11px] font-bold text-on-surface">4.0</span>
+            </div>
+            <button onclick="cycleTicketStatus('C03')" class="text-text-muted hover:text-on-surface p-1 rounded">
+              <span class="material-symbols-outlined text-[16px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+      
+        <div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 transition-all hover:border-border-strong" data-id="C04">
+          <div class="flex items-center justify-between gap-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">C04</span>
+              <span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">Hostel</span>
+              <span class="font-label-code text-[11px] text-text-muted">· 12h ago</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="cycleTicketStatus('C04')">
+                <span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-tertiary-container text-on-tertiary-container border border-[#6ee7b7] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Resolved</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md font-semibold text-on-surface">Water heater tripping breaker in Wing C</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">token</span>
+              <span class="font-label-code text-[11px] text-text-muted">Urgency Score:</span>
+              <span class="font-label-code text-[11px] font-bold text-on-surface">2.0</span>
+            </div>
+            <button onclick="cycleTicketStatus('C04')" class="text-text-muted hover:text-on-surface p-1 rounded">
+              <span class="material-symbols-outlined text-[16px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+      </div>
+<!-- Minimalist Gumloop-Style Zero-State Notice -->
+<div class="hidden flex-col items-center justify-center p-space-lg bg-surface-container-lowest rounded-xl border border-border-subtle portal-shadow text-center" id="empty-state-notice">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-3 border border-border-strong">
+<span class="material-symbols-outlined text-[32px] text-primary">filter_alt_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold uppercase text-on-surface">Queue Cleared &amp; Synced</h3>
+<p class="font-body-sm text-[12px] text-text-muted mt-1 max-w-[240px]">No operational complaints matching current query matrix. All telemetry streams are nominal.</p>
+<button class="mt-4 px-4 py-1.5 rounded bg-primary text-white font-label-badge text-[11px] font-semibold uppercase tracking-wider shadow-sm hover:bg-[#1e293b] transition-colors" id="reset-filters-btn">
+          Reset Filter Matrix
+        </button>
+</div>
+</div>
+<!-- Campus Ambient Pipeline Footer Snippet -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-3 mt-1" id="status-breakdown-card"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-primary">donut_large</span><h3 class="font-headline-sm text-headline-sm font-bold uppercase tracking-tight text-on-surface">Status Breakdown</h3></div><span class="font-label-code text-[11px] text-primary bg-[#eff6ff] border border-[#bfdbfe] px-2 py-0.5 rounded font-bold uppercase">4 Total</span></div><div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1"><div class="relative flex items-center justify-center shrink-0"><svg class="w-28 h-28 transform -rotate-90" viewBox="0 0 100 100"><circle cx="50" cy="50" fill="transparent" r="38" stroke="#f1f5f9" stroke-width="12"></circle><circle cx="50" cy="50" fill="transparent" r="38" stroke="#dc2626" stroke-dasharray="238.76" stroke-dashoffset="119.38" stroke-width="12"></circle><circle cx="50" cy="50" fill="transparent" r="38" stroke="#d97706" stroke-dasharray="238.76" stroke-dashoffset="179.07" stroke-width="12"></circle><circle cx="50" cy="50" fill="transparent" r="38" stroke="#059669" stroke-dasharray="238.76" stroke-dashoffset="179.07" stroke-width="12" style="stroke-dashoffset: 208.91;"></circle></svg><div class="absolute flex flex-col items-center justify-center text-center pointer-events-none"><span class="font-display-hero text-headline-sm text-on-surface font-bold leading-none">4</span><span class="font-label-code text-[10px] text-text-muted mt-0.5 uppercase tracking-wider">Active</span></div></div><div class="flex flex-col gap-2 w-full flex-1"><div class="flex items-center justify-between p-1.5 rounded-lg bg-surface-container-low border border-border-subtle"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-error shrink-0"></span><span class="font-body-sm text-body-sm text-on-surface font-medium">Raised / Pending</span></div><div class="flex items-center gap-1.5"><span class="font-label-code text-[11px] font-bold text-error">2</span><span class="font-label-code text-[11px] text-text-muted">(50%)</span></div></div><div class="flex items-center justify-between p-1.5 rounded-lg bg-surface-container-low border border-border-subtle"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-accent-amber shrink-0"></span><span class="font-body-sm text-body-sm text-on-surface font-medium">In Progress</span></div><div class="flex items-center gap-1.5"><span class="font-label-code text-[11px] font-bold text-accent-amber">1</span><span class="font-label-code text-[11px] text-text-muted">(25%)</span></div></div><div class="flex items-center justify-between p-1.5 rounded-lg bg-surface-container-low border border-border-subtle"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0"></span><span class="font-body-sm text-body-sm text-on-surface font-medium">Resolved / Closed</span></div><div class="flex items-center gap-1.5"><span class="font-label-code text-[11px] font-bold text-tertiary">1</span><span class="font-label-code text-[11px] text-text-muted">(25%)</span></div></div></div></div></div><div class="flex items-center justify-between text-text-muted py-space-sm">
+<div class="flex items-center gap-1.5 font-label-code text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="">Deterministic Scheduler active</span>
+</div>
+<span class="font-label-code text-[11px]">CampusPulse · Portal Spec</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Initial Dataset
+    const initialTickets = [
+      {
+        id: 'C01',
+        category: 'Wi-Fi',
+        desc: '5GHz AP drops constantly in Block B 3rd floor corridor',
+        hoursPending: 48,
+        score: 3.0,
+        status: 'Raised',
+        weight: 2
+      },
+      {
+        id: 'C02',
+        category: 'Classroom',
+        desc: 'Projector lamp flickering in Hall 102 during lectures',
+        hoursPending: 18,
+        score: 1.0,
+        status: 'In Progress',
+        weight: 1
+      },
+      {
+        id: 'C03',
+        category: 'Laboratory',
+        desc: 'Centrifuge unit 4 displaying error code E-12',
+        hoursPending: 72,
+        score: 4.0,
+        status: 'Raised',
+        weight: 3
+      },
+      {
+        id: 'C04',
+        category: 'Hostel',
+        desc: 'Water heater tripping breaker in Wing C',
+        hoursPending: 12,
+        score: 2.0,
+        status: 'Resolved',
+        weight: 2
+      }
+    ];
+
+    let tickets = [...initialTickets];
+    let selectedCategoryFilter = 'All';
+    let selectedStatusFilter = 'All';
+    let searchQuery = '';
+    let forceEmptyState = false;
+
+    // Elements
+    const listContainer = document.getElementById('ticket-list-container');
+    const emptyState = document.getElementById('empty-state-notice');
+    const searchInput = document.getElementById('queue-search');
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+    const drawer = document.getElementById('new-ticket-drawer');
+    const drawerBody = document.getElementById('drawer-body');
+    const openDrawerBtn = document.getElementById('open-ticket-drawer-btn');
+    const ticketDesc = document.getElementById('ticket-desc');
+    const charCounter = document.getElementById('char-counter');
+    const submitBtn = document.getElementById('submit-ticket-btn');
+    const validationIndicator = document.getElementById('validation-indicator');
+    const catSelectorGroup = document.getElementById('category-selector-group');
+    
+    // Counters
+    const statTotal = document.getElementById('stat-total');
+    const statPending = document.getElementById('stat-pending');
+    const statProgress = document.getElementById('stat-progress');
+    const statResolved = document.getElementById('stat-resolved');
+
+    function updateStats() {
+      const total = tickets.length;
+      const pending = tickets.filter(t => t.status === 'Raised').length;
+      const progress = tickets.filter(t => t.status === 'In Progress').length;
+      const resolved = tickets.filter(t => t.status === 'Resolved').length;
+
+      statTotal.textContent = total;
+      statPending.textContent = pending;
+      statProgress.textContent = progress;
+      statResolved.textContent = resolved;
+    }
+
+    function getStatusBadge(status) {
+      if (status === 'Raised') {
+        return '<span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-error-container text-on-error-container border border-[#fca5a5] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-error"></span>Raised</span>';
+      } else if (status === 'In Progress') {
+        return '<span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-secondary-fixed text-on-secondary-fixed border border-[#fcd34d] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-spin"></span>In Progress</span>';
+      } else {
+        return '<span class="status-pill inline-flex items-center gap-1 font-label-badge text-[11px] bg-tertiary-container text-on-tertiary-container border border-[#6ee7b7] px-2 py-0.5 rounded font-bold uppercase cursor-pointer" title="Tap to cycle status"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Resolved</span>';
+      }
+    }
+
+    function renderList() {
+      if (forceEmptyState) {
+        listContainer.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+        return;
+      }
+
+      const filtered = tickets.filter(ticket => {
+        const matchesCat = selectedCategoryFilter === 'All' || ticket.category === selectedCategoryFilter;
+        const matchesStatus = selectedStatusFilter === 'All' || ticket.status === selectedStatusFilter;
+        const matchesSearch = ticket.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              ticket.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              ticket.category.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesStatus && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      emptyState.classList.remove('flex');
+
+      listContainer.innerHTML = filtered.map(t => `
+        <div class="bg-surface-container-lowest p-space-sm rounded-xl border border-border-subtle portal-shadow flex flex-col gap-2 transition-all hover:border-border-strong" data-id="${t.id}">
+          <div class="flex items-center justify-between gap-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-label-code text-[11px] bg-[#1e293b] text-white px-2 py-0.5 rounded font-bold">${t.id}</span>
+              <span class="font-label-badge text-[11px] bg-surface-container text-on-surface-variant border border-border-strong px-2 py-0.5 rounded font-semibold uppercase">${t.category}</span>
+              <span class="font-label-code text-[11px] text-text-muted">· ${t.hoursPending}h ago</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="cycleTicketStatus('${t.id}')">
+                ${getStatusBadge(t.status)}
+              </button>
+            </div>
+          </div>
+
+          <p class="font-body-md text-body-md font-semibold text-on-surface">${t.desc}</p>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-primary">token</span>
+              <span class="font-label-code text-[11px] text-text-muted">Urgency Score:</span>
+              <span class="font-label-code text-[11px] font-bold text-on-surface">${t.score.toFixed(1)}</span>
+            </div>
+            <button onclick="cycleTicketStatus('${t.id}')" class="text-text-muted hover:text-on-surface p-1 rounded">
+              <span class="material-symbols-outlined text-[16px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Expose cycle handler
+    window.cycleTicketStatus = function(id) {
+      const ticket = tickets.find(t => t.id === id);
+      if (!ticket) return;
+      if (ticket.status === 'Raised') {
+        ticket.status = 'In Progress';
+      } else if (ticket.status === 'In Progress') {
+        ticket.status = 'Resolved';
+      } else {
+        ticket.status = 'Raised';
+      }
+      updateStats();
+      renderList();
+    };
+
+    window.advanceCard = function(id) {
+      const ticket = tickets.find(t => t.id === id);
+      if (ticket) {
+        ticket.status = 'In Progress';
+        updateStats();
+        renderList();
+      }
+    };
+
+    // Category Selector in Drawer
+    let selectedDrawerCat = 'Wi-Fi';
+    let selectedDrawerWeight = 2;
+
+    catSelectorGroup.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-pill');
+      if (!btn) return;
+      document.querySelectorAll('.cat-pill').forEach(b => {
+        b.classList.remove('bg-surface-container-high', 'border-primary', 'text-primary');
+        b.classList.add('bg-surface-container-low', 'border-border-strong', 'text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-high', 'border-primary', 'text-primary');
+      btn.classList.remove('bg-surface-container-low', 'border-border-strong', 'text-on-surface-variant');
+      selectedDrawerCat = btn.getAttribute('data-cat');
+      selectedDrawerWeight = parseInt(btn.getAttribute('data-weight'), 10);
+    });
+
+    // Character counter & instant validation
+    ticketDesc.addEventListener('input', () => {
+      const len = ticketDesc.value.length;
+      charCounter.textContent = `${len} / 250`;
+      if (len >= 5) {
+        validationIndicator.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-label-code text-[11px] text-tertiary font-semibold">Valid Input</span>
+        `;
+      } else {
+        validationIndicator.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-text-muted"></span>
+          <span class="font-label-code text-[11px] text-text-muted">Min 5 chars</span>
+        `;
+      }
+    });
+
+    // Drawer Ingestion Submit
+    submitBtn.addEventListener('click', () => {
+      const descVal = ticketDesc.value.trim();
+      if (descVal.length < 5) {
+        ticketDesc.focus();
+        return;
+      }
+
+      const nextIndex = tickets.length + 1;
+      const newId = `C0${nextIndex < 10 ? nextIndex : nextIndex}`;
+      const newTicket = {
+        id: newId,
+        category: selectedDrawerCat,
+        desc: descVal,
+        hoursPending: 1,
+        score: selectedDrawerWeight + Math.floor(1 / 24),
+        status: 'Raised',
+        weight: selectedDrawerWeight
+      };
+
+      tickets.unshift(newTicket);
+      ticketDesc.value = '';
+      charCounter.textContent = '0 / 250';
+      validationIndicator.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span class="font-label-code text-[11px] text-tertiary font-semibold">Ticket Logged!</span>
+      `;
+      
+      updateStats();
+      renderList();
+
+      setTimeout(() => {
+        validationIndicator.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-text-muted"></span>
+          <span class="font-label-code text-[11px] text-text-muted">Draft State</span>
+        `;
+      }, 2500);
+    });
+
+    openDrawerBtn.addEventListener('click', () => {
+      drawer.scrollIntoView({ behavior: 'smooth' });
+      ticketDesc.focus();
+    });
+
+    // Search Input
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderList();
+      });
+    }
+
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener('click', () => {
+        forceEmptyState = false;
+        selectedCategoryFilter = 'All';
+        selectedStatusFilter = 'All';
+        searchQuery = '';
+        if (searchInput) searchInput.value = '';
+        renderList();
+      });
+    }
+
+    // Initial Launch
+    updateStats();
+    renderList();
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-white border-t border-border-subtle portal-shadow" data-active-classes="text-primary font-bold"><div class="flex items-center justify-around h-16 px-gutter-mobile"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs transition-colors text-primary font-bold flex-1" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs text-text-muted hover:text-primary transition-colors flex-1" data-path="complaint-queue" href="#"><span class="material-symbols-outlined text-[20px]">inbox</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase">Queue</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs text-text-muted hover:text-primary transition-colors flex-1" data-path="new-ticket" href="#"><span class="material-symbols-outlined text-[20px]">add_circle</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase">Raise Complain</span></a></div></nav>
+
+
+</body></html>

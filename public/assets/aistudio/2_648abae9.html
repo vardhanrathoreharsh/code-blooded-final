@@ -1,0 +1,619 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+@layer base {
+  html, body { width: 100vw; margin: 0; padding: 0; background-color: #F8FAFC; }
+  body { overscroll-behavior: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+.portal-shadow {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.portal-shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+}
+.portal-shadow-sm {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+.portal-border {
+  border: 1px solid #E2E8F0;
+}
+.portal-border-refined {
+  border: 1px solid #CBD5E1;
+}
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "canvas-raw": "#F8FAFC",
+        "acid-yellow": "#FEF3C7",
+        "cobalt": "#1E3A8A",
+        "vermilion": "#DC2626",
+        "acid-green": "#059669",
+        "emerald-rich": "#059669",
+        "stark-black": "#0F172A",
+        "cream-card": "#FFFFFF",
+        "surface-tint": "#1E3A8A",
+        "surface": "#F8FAFC",
+        "surface-card": "#FFFFFF",
+        "primary": "#1E3A8A",
+        "on-primary": "#FFFFFF",
+        "on-surface": "#0F172A",
+        "text-muted": "#64748B",
+        "surface-container": "#F1F5F9",
+        "surface-container-low": "#F8FAFC",
+        "surface-container-high": "#E2E8F0",
+        "surface-container-highest": "#CBD5E1",
+        "error-container": "#FEE2E2",
+        "accent-rose": "#DC2626",
+        "accent-amber": "#D97706",
+        "tertiary-container": "#D1FAE5",
+        "tertiary-fixed": "#A7F3D0",
+        "on-tertiary-fixed": "#064E3B",
+        "on-tertiary-fixed-variant": "#047857",
+        "primary-fixed": "#DBEAFE",
+        "on-primary-fixed": "#1E3A8A",
+        "secondary-fixed": "#E0E7FF",
+        "on-secondary-fixed": "#312E81",
+        "on-surface-variant": "#334155"
+      },
+      borderRadius: {
+        "DEFAULT": "0.375rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "2xl": "1rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-xl": "2rem",
+        "gutter": "1.5rem",
+        "margin-mobile": "1rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "gutter-mobile": "1rem",
+        "margin": "2rem",
+        "space-2xl": "3rem",
+        "space-lg": "1.5rem"
+      },
+      fontFamily: {
+        "display-hero": ["Cinzel", "serif"],
+        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-lg-mobile": ["Cinzel", "serif"],
+        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-lg": ["Cinzel", "serif"],
+        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+        "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "display-hero-mobile": ["Cinzel", "serif"],
+        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "label-code": ["JetBrains Mono", "monospace"],
+        "label-badge": ["Plus Jakarta Sans", "sans-serif"]
+      }
+    }
+  }
+};
+</script>
+<style>
+  body {
+    min-height: max(884px, 100dvh);
+  }
+</style>
+</head><body class="bg-[#F8FAFC] font-body-md text-stark-black flex flex-col min-h-screen antialiased selection:bg-[#DBEAFE] selection:text-[#1E3A8A]"><header class="fixed top-0 w-full z-50 pt-safe bg-[#FFFFFF] border-b border-[#E2E8F0] shadow-sm"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="CampusPulse Logo" class="h-8 w-auto object-contain shrink-0 border border-[#E2E8F0] rounded bg-white p-0.5" src="https://lh3.googleusercontent.com/aida/AEtjO1WEuFYt0Qx1R4uRItrnC0SvuM-rhc88cIB1wq5zGBlzKWj21RcYXF8I8DnXZFJm4pXGeZs1I9r2y7FVl7ktEbUp5O5ICaMD4Wzb37IcHdcUFbrfQXBgbfs6sk1aGKI99RpqwXg8D2urZ-ngDNC4xurC7ApiGhHkInyQMFHaVpmu0OlV-BMeVsRxp6_8k2Kg_9GmsMg6yRGrlwXTCbn5Lna2wYpg9wGJ0aOKBoLtGAzY"><div class="flex items-center gap-1.5 min-w-0"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-[#1E3A8A] uppercase truncate">Campus Resolve</span><span class="font-label-badge text-[11px] bg-[#EEF2FF] text-[#1E3A8A] border border-[#CBD5E1] rounded px-1.5 py-0.5 font-bold uppercase shrink-0">Ops</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-1.5 px-2.5 py-1 border border-[#E2E8F0] rounded bg-[#F8FAFC] portal-shadow-sm"><span class="w-2 h-2 rounded-full bg-emerald-rich animate-pulse"></span><span class="font-label-code text-[11px] text-[#475569] font-medium hidden sm:inline">Local Persistence Active</span></div><div class="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-[#CBD5E1] bg-[#EFF6FF]"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy_TQi9iaQNCMli7RaiKHkS79TiCBSk-q-QClmIpueOb7AtnVmZhiMQeWCh639avx9l52zQTz2zEzujSvwNCHH2k9fzn3pIAcG9m7JzgmiFy4QSp8Zb0C7FUh3hcRCwrvjLRHTCVrSI05QL396iy2WbOxuRC55zlCWlMBl0bpT_bJ0_pKo-cMu55RiyaVLBYIIAXIhvb9y9CKIKpipzCLrrQHS4ef5LxHrGjYwl9Pf"></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-[#F8FAFC]"><div class="flex flex-col w-full px-gutter-mobile py-space-sm space-y-space-md">
+<!-- Header & Live Engine Status Banner -->
+<div class="flex flex-col space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#CBD5E1] bg-[#F1F5F9] portal-shadow-sm w-fit">
+<span class="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+<span class="font-label-code text-[11px] text-[#334155] font-semibold tracking-tight">Local Persistence Active • Auto-synced</span>
+</div>
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#1E3A8A] bg-[#1E3A8A] text-white font-headline-sm text-label-badge shadow-sm active:bg-[#1E293B] transition-all uppercase tracking-wider font-semibold" data-path="new-ticket" href="#">
+<span class="material-symbols-outlined text-[16px] font-semibold">add</span>
+<span class="">+ Raise Complain</span>
+</a>
+</div>
+<div class="pt-1">
+<h1 class="font-headline-lg-mobile text-[1.65rem] font-bold uppercase text-[#0F172A] tracking-wider leading-none">Queue &amp; Analytics</h1>
+<p class="font-body-sm text-[12px] font-medium text-[#64748B] mt-1 uppercase tracking-wider">Deterministic Urgency Engine &amp; Active Campus Triage</p>
+</div>
+</div>
+<!-- Top Stats & Performance Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Stat 1: Total Complaints -->
+<div class="p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-[#64748B]">Total Complaints</span>
+<span class="material-symbols-outlined text-[#1E3A8A] text-[20px]">dataset</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-display-hero text-[1.75rem] font-bold text-[#0F172A]">28</span>
+<span class="font-label-badge text-[11px] text-[#1E3A8A] bg-[#EFF6FF] border border-[#BFDBFE] rounded px-1.5 py-0.5 font-semibold">+12% cyc</span>
+</div>
+</div>
+<!-- Stat 2: Pending Unresolved -->
+<div class="p-3.5 border border-[#FECACA] rounded-lg bg-[#FEF2F2] portal-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-[#DC2626]">Pending Unresolved</span>
+<span class="material-symbols-outlined text-[#DC2626] text-[20px]">emergency</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-display-hero text-[1.75rem] font-bold text-[#0F172A]">19</span>
+<span class="font-label-badge text-[11px] text-[#991B1B] bg-[#FEE2E2] border border-[#FCA5A5] rounded px-1.5 py-0.5 font-bold uppercase">Urgent SLA</span>
+</div>
+</div>
+<!-- Stat 3: In Progress -->
+<div class="p-3.5 border border-[#FDE68A] rounded-lg bg-[#FFFBEB] portal-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-[#D97706]">In Progress</span>
+<span class="material-symbols-outlined text-[#D97706] text-[20px]">timelapse</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-display-hero text-[1.75rem] font-bold text-[#0F172A]">6</span>
+<span class="font-label-badge text-[11px] text-[#92400E] bg-[#FEF3C7] border border-[#FCD34D] rounded px-1.5 py-0.5 font-semibold">∼2.4h cycle</span>
+</div>
+</div>
+<!-- Stat 4: Resolved Satisfaction -->
+<div class="p-3.5 border border-[#A7F3D0] rounded-lg bg-[#F0FDF4] portal-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-[12px] font-semibold uppercase tracking-wider text-[#059669]">Resolved</span>
+<span class="material-symbols-outlined text-[#059669] text-[20px]">verified</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="font-display-hero text-[1.75rem] font-bold text-[#0F172A]">9</span>
+<span class="font-label-badge text-[11px] text-[#065F46] bg-[#D1FAE5] border border-[#6EE7B7] rounded px-1.5 py-0.5 font-semibold">94.2% sat</span>
+</div>
+</div>
+</div>
+<!-- Analytical Urgency Spotlight Section -->
+<div class="flex flex-col space-y-space-sm p-3.5 border border-[#CBD5E1] rounded-lg bg-[#F1F5F9] portal-shadow-md">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded bg-[#1E3A8A] flex items-center justify-center shrink-0 text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px]">calculate</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-[#0F172A] font-bold uppercase tracking-tight">High-Priority Unresolved Queue</span>
+<span class="px-1.5 py-0.5 text-label-badge text-[10px] rounded bg-[#1E3A8A] text-white font-bold uppercase">Top 3</span>
+</div>
+<p class="font-label-code text-[11px] text-[#475569] font-medium mt-1 leading-snug">
+          Urgency Score = Category Weight (Lab: 3, Wi-Fi: 2, Hostel: 2, Classroom: 1) + floor(Hours Pending / 24)
+        </p>
+</div>
+</div>
+<!-- Priority Cards Carousel / Stack -->
+<div class="flex flex-col space-y-2.5 pt-1" id="priorityQueueContainer">
+<!-- Priority Card 1 (ID: C03) -->
+<div class="p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C03</span>
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Classroom • +1</span>
+<span class="font-label-code text-[11px] text-[#DC2626] font-semibold uppercase">72h pending</span>
+</div>
+<div class="flex items-center gap-1 bg-[#FEF2F2] border border-[#FECACA] rounded px-2 py-0.5">
+<span class="font-label-code text-[11px] text-[#991B1B] font-bold">Score 4.0</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] leading-snug font-semibold">
+          Overhead projector lamp flickering and ballast failing in Hall 102
+        </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-badge text-[11px] bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] rounded px-2 py-0.5 font-medium uppercase">Oldest Submission Priority</span>
+<button class="font-label-badge text-[11px] text-white bg-[#1E3A8A] rounded px-3 py-1 shadow-sm hover:bg-[#1E293B] active:scale-[0.98] transition-all flex items-center gap-1 font-semibold uppercase" onclick="advanceComplainStatus('C03', 'In Progress')">
+<span class="">Move to In Progress</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Priority Card 2 (ID: C01) -->
+<div class="p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C01</span>
+<span class="font-label-badge text-[11px] bg-[#EEF2FF] text-[#312E81] border border-[#C7D2FE] rounded px-2 py-0.5 font-semibold uppercase">Wi-Fi • +2</span>
+<span class="font-label-code text-[11px] text-[#D97706] font-semibold uppercase">48h pending</span>
+</div>
+<div class="flex items-center gap-1 bg-[#FEF3C7] border border-[#FDE68A] rounded px-2 py-0.5">
+<span class="font-label-code text-[11px] text-[#92400E] font-bold">Score 4.0</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] leading-snug font-semibold">
+          5GHz AP drops packet in Block B 3rd floor corridor
+        </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-badge text-[11px] bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] rounded px-2 py-0.5 font-medium uppercase">High Impact</span>
+<button class="font-label-badge text-[11px] text-white bg-[#1E3A8A] rounded px-3 py-1 shadow-sm hover:bg-[#1E293B] active:scale-[0.98] transition-all flex items-center gap-1 font-semibold uppercase" onclick="advanceComplainStatus('C01', 'In Progress')">
+<span class="">Move to In Progress</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Priority Card 3 (ID: C02) -->
+<div class="p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C02</span>
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Hostel • +2</span>
+<span class="font-label-code text-[11px] text-[#64748B] font-semibold uppercase">8h pending</span>
+</div>
+<div class="flex items-center gap-1 bg-[#F1F5F9] border border-[#CBD5E1] rounded px-2 py-0.5">
+<span class="font-label-code text-[11px] text-[#334155] font-bold">Score 2.0</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] leading-snug font-semibold">
+          Water heater circuit tripping in Wing C 2nd floor bathroom
+        </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-badge text-[11px] bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] rounded px-2 py-0.5 font-medium uppercase">Normal Escalation</span>
+<button class="font-label-badge text-[11px] text-white bg-[#1E3A8A] rounded px-3 py-1 shadow-sm hover:bg-[#1E293B] active:scale-[0.98] transition-all flex items-center gap-1 font-semibold uppercase" onclick="advanceComplainStatus('C02', 'In Progress')">
+<span class="">Move to In Progress</span>
+<span class="material-symbols-outlined text-[13px] font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Exclusion note -->
+<div class="flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[#64748B] text-[15px]">info</span>
+<span class="font-body-sm text-[11px] font-medium text-[#64748B]">Resolved complaints automatically excluded from this priority queue.</span>
+</div>
+</div>
+<!-- Search, Filter & Control Toolbar -->
+<div class="flex flex-col space-y-2.5">
+<!-- Search Bar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#64748B]">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+<input class="w-full h-10 pl-9 pr-8 border border-[#CBD5E1] rounded-lg bg-white text-[#0F172A] font-body-md text-[13px] placeholder:text-[#94A3B8] portal-shadow-sm focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]" id="complainSearchInput" oninput="handleSearchFilter()" placeholder="Filter by ID, keywords, or location..." type="text">
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#64748B] hidden font-bold" id="clearSearchBtn" onclick="clearSearch()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Category Filter Pills (Horizontal Scroll) -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-nowrap" id="categoryFilterRow">
+<button class="category-pill active px-3 py-1 border border-[#1E3A8A] rounded-full font-label-badge text-[11px] font-bold bg-[#1E3A8A] text-white shadow-sm transition-all uppercase" onclick="filterCategory('All', this)">
+        All (28)
+      </button>
+<button class="category-pill px-3 py-1 border border-[#CBD5E1] rounded-full font-label-badge text-[11px] font-semibold bg-white text-[#475569] hover:bg-[#F8FAFC] transition-all uppercase" onclick="filterCategory('Wi-Fi', this)">
+        Wi-Fi (11)
+      </button>
+<button class="category-pill px-3 py-1 border border-[#CBD5E1] rounded-full font-label-badge text-[11px] font-semibold bg-white text-[#475569] hover:bg-[#F8FAFC] transition-all uppercase" onclick="filterCategory('Hostel', this)">
+        Hostel (7)
+      </button>
+<button class="category-pill px-3 py-1 border border-[#CBD5E1] rounded-full font-label-badge text-[11px] font-semibold bg-white text-[#475569] hover:bg-[#F8FAFC] transition-all uppercase" onclick="filterCategory('Classroom', this)">
+        Classroom (5)
+      </button>
+<button class="category-pill px-3 py-1 border border-[#CBD5E1] rounded-full font-label-badge text-[11px] font-semibold bg-white text-[#475569] hover:bg-[#F8FAFC] transition-all uppercase" onclick="filterCategory('Laboratory', this)">
+        Laboratory (5)
+      </button>
+</div>
+<!-- Status Segment Toggle -->
+<div class="grid grid-cols-4 gap-1 p-1 bg-[#E2E8F0] rounded-lg border border-[#CBD5E1]">
+<button class="status-seg-pill active py-1.5 font-label-badge text-[11px] font-bold bg-white text-[#1E3A8A] rounded shadow-sm transition-all text-center uppercase tracking-wide" onclick="filterStatus('ALL', this)">
+        All
+      </button>
+<button class="status-seg-pill py-1.5 font-label-badge text-[11px] font-semibold text-[#475569] rounded transition-all text-center uppercase tracking-wide hover:text-[#0F172A]" onclick="filterStatus('Raised', this)">
+        Raised
+      </button>
+<button class="status-seg-pill py-1.5 font-label-badge text-[11px] font-semibold text-[#475569] rounded transition-all text-center uppercase tracking-wide hover:text-[#0F172A]" onclick="filterStatus('In Progress', this)">
+        In Progress
+      </button>
+<button class="status-seg-pill py-1.5 font-label-badge text-[11px] font-semibold text-[#475569] rounded transition-all text-center uppercase tracking-wide hover:text-[#0F172A]" onclick="filterStatus('Resolved', this)">
+        Resolved
+      </button>
+</div>
+</div>
+<!-- Master Complaints Ledger Header -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-[#0F172A] font-bold uppercase tracking-tight">Active Ledger</span>
+<span class="font-label-code text-[11px] bg-[#EFF6FF] text-[#1E3A8A] border border-[#BFDBFE] rounded px-2 py-0.5 font-bold uppercase" id="activeCountBadge">5 complaints</span>
+</div>
+<span class="font-body-sm text-[11px] text-[#64748B] font-semibold uppercase tracking-wider">Sorted by Score ↓</span>
+</div>
+<!-- Master Complaints Card List / Table -->
+<div class="flex flex-col space-y-2.5" id="complaintsLedgerList">
+<!-- Complain Row 1: C03 -->
+<div class="complain-card p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2 transition-all hover:border-[#CBD5E1]" data-category="Classroom" data-id="C03" data-status="Raised">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C03</span>
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Classroom • +1</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-[11px] bg-[#FEE2E2] text-[#991B1B] border border-[#FCA5A5] rounded px-2 py-0.5 font-bold uppercase tracking-wider">Score 4.0 - Critical</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] font-semibold leading-snug">
+        Projector lamp flickering and ballast failing in Hall 102
+      </p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-[#64748B] font-medium">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="font-label-code text-[11px]">72h ago</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-[#FEF2F2] text-[#991B1B] border border-[#FCA5A5] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm" onchange="updateRowStatus('C03', this.value)">
+<option selected="" value="Raised">Raised</option>
+<option value="In Progress">Move to In Progress</option>
+<option value="Resolved">Mark Resolved</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-[#991B1B] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none font-bold">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Complain Row 2: C01 -->
+<div class="complain-card p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2 transition-all hover:border-[#CBD5E1]" data-category="Wi-Fi" data-id="C01" data-status="Raised">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C01</span>
+<span class="font-label-badge text-[11px] bg-[#EEF2FF] text-[#312E81] border border-[#C7D2FE] rounded px-2 py-0.5 font-semibold uppercase">Wi-Fi • +2</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-[11px] bg-[#FEF3C7] text-[#92400E] border border-[#FCD34D] rounded px-2 py-0.5 font-bold uppercase tracking-wider">Score 4.0 - High</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] font-semibold leading-snug">
+        5GHz AP drops constantly in Block B 3rd floor corridor
+      </p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-[#64748B] font-medium">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="font-label-code text-[11px]">48h ago</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-[#FEF2F2] text-[#991B1B] border border-[#FCA5A5] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm" onchange="updateRowStatus('C01', this.value)">
+<option selected="" value="Raised">Raised</option>
+<option value="In Progress">Move to In Progress</option>
+<option value="Resolved">Mark Resolved</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-[#991B1B] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none font-bold">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Complain Row 3: C02 -->
+<div class="complain-card p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2 transition-all hover:border-[#CBD5E1]" data-category="Hostel" data-id="C02" data-status="In Progress">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C02</span>
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Hostel • +2</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-bold uppercase tracking-wider">Score 2.0 - Normal</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] font-semibold leading-snug">
+        Water heater tripping main breaker in Wing C 2nd floor
+      </p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-[#64748B] font-medium">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="font-label-code text-[11px]">8h ago</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-[#FEF3C7] text-[#92400E] border border-[#FCD34D] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm" onchange="updateRowStatus('C02', this.value)">
+<option value="Raised">Raised</option>
+<option selected="" value="In Progress">In Progress</option>
+<option value="Resolved">Mark Resolved</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-[#92400E] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none font-bold">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Complain Row 4: C04 -->
+<div class="complain-card p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2 transition-all opacity-85" data-category="Laboratory" data-id="C04" data-status="Resolved">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C04</span>
+<span class="font-label-badge text-[11px] bg-[#D1FAE5] text-[#065F46] border border-[#6EE7B7] rounded px-2 py-0.5 font-semibold uppercase">Laboratory • +3</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Score 7.0</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#64748B] font-medium leading-snug line-through">
+        Centrifuge unit 4 displaying recurring error code E-12
+      </p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-[#059669] font-medium">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-code text-[11px]">96h ago (Closed)</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-[#D1FAE5] text-[#065F46] border border-[#6EE7B7] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm" onchange="updateRowStatus('C04', this.value)">
+<option value="Raised">Reopen (Raised)</option>
+<option value="In Progress">Move to In Progress</option>
+<option selected="" value="Resolved">Resolved</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-[#065F46] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none font-bold">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Complain Row 5: C05 -->
+<div class="complain-card p-3.5 border border-[#E2E8F0] rounded-lg bg-white portal-shadow flex flex-col space-y-2 transition-all hover:border-[#CBD5E1]" data-category="Hostel" data-id="C05" data-status="Raised">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-[11px] bg-[#1E293B] text-white rounded px-2 py-0.5 font-bold">C05</span>
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Hostel • +2</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-[11px] bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] rounded px-2 py-0.5 font-semibold uppercase">Score 2.0</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-[#0F172A] font-semibold leading-snug">
+        Window latch stuck open in Room 304 North block
+      </p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-[#64748B] font-medium">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="font-label-code text-[11px]">4h ago</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-[#FEF2F2] text-[#991B1B] border border-[#FCA5A5] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm" onchange="updateRowStatus('C05', this.value)">
+<option selected="" value="Raised">Raised</option>
+<option value="In Progress">Move to In Progress</option>
+<option value="Resolved">Mark Resolved</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-[#991B1B] absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none font-bold">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty Results State (Hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-8 bg-white border border-[#CBD5E1] rounded-lg portal-shadow text-center space-y-2" id="emptyResultsState">
+<div class="w-12 h-12 rounded-full border border-[#CBD5E1] bg-[#F1F5F9] flex items-center justify-center text-[#64748B]">
+<span class="material-symbols-outlined text-[24px]">inbox</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold uppercase text-[#0F172A]">No complaints found</span>
+<p class="font-body-sm text-body-sm font-normal text-[#64748B] max-w-[240px]">
+      No complaints found matching your query or active filter selections.
+    </p>
+<button class="mt-2 px-4 py-1.5 border border-[#1E3A8A] rounded bg-[#1E3A8A] text-white font-label-badge text-[11px] font-semibold shadow-sm uppercase tracking-wider" onclick="resetFilters()">
+      Reset Filters
+    </button>
+</div>
+<!-- Footer Algorithm Micro-Meta -->
+<div class="flex flex-col items-center justify-center py-space-sm text-center space-y-1">
+<div class="flex items-center gap-1 text-[#64748B]">
+<span class="material-symbols-outlined text-[15px]">memory</span>
+<span class="font-label-code text-[11px] uppercase tracking-tight">Deterministic Priority Algorithm v2.4 • CampusPulse Engine</span>
+</div>
+<span class="font-body-sm text-[11px] text-[#94A3B8] font-medium uppercase tracking-wider">© Campus Resolve Operations • Real-time Campus Sync</span>
+</div>
+</div>
+<script>
+  // Ensure the App Shell highlights the 'Queue' tab
+  (function setActiveNavTab() {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('data-path') === 'complaint-queue') {
+        link.classList.remove('text-[#64748B]');
+        link.classList.add('text-[#1E3A8A]', 'font-bold');
+      } else {
+        link.classList.remove('text-[#1E3A8A]', 'font-bold');
+        link.classList.add('text-[#64748B]');
+      }
+    });
+  })();
+
+  let activeCategory = 'All';
+  let activeStatus = 'ALL';
+
+  function filterCategory(cat, el) {
+    activeCategory = cat;
+    document.querySelectorAll('.category-pill').forEach(btn => {
+      btn.classList.remove('bg-[#1E3A8A]', 'text-white', 'border-[#1E3A8A]', 'active');
+      btn.classList.add('bg-white', 'text-[#475569]', 'border-[#CBD5E1]');
+    });
+    el.classList.remove('bg-white', 'text-[#475569]', 'border-[#CBD5E1]');
+    el.classList.add('bg-[#1E3A8A]', 'text-white', 'border-[#1E3A8A]', 'active');
+    applyFilters();
+  }
+
+  function filterStatus(st, el) {
+    activeStatus = st;
+    document.querySelectorAll('.status-seg-pill').forEach(btn => {
+      btn.classList.remove('bg-white', 'text-[#1E3A8A]', 'shadow-sm', 'font-bold');
+      btn.classList.add('text-[#475569]', 'font-semibold');
+    });
+    el.classList.add('bg-white', 'text-[#1E3A8A]', 'shadow-sm', 'font-bold');
+    el.classList.remove('text-[#475569]', 'font-semibold');
+    applyFilters();
+  }
+
+  function handleSearchFilter() {
+    const searchVal = document.getElementById('complainSearchInput').value.trim();
+    const clearBtn = document.getElementById('clearSearchBtn');
+    if (searchVal.length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+    }
+    applyFilters();
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('complainSearchInput');
+    input.value = '';
+    document.getElementById('clearSearchBtn').classList.add('hidden');
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const searchVal = document.getElementById('complainSearchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('#complaintsLedgerList .complain-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      const cardStatus = card.getAttribute('data-status');
+      const cardText = card.textContent.toLowerCase();
+
+      const matchCategory = (activeCategory === 'All' || cardCategory === activeCategory);
+      const matchStatus = (activeStatus === 'ALL' || cardStatus === activeStatus);
+      const matchSearch = (searchVal === '' || cardText.includes(searchVal));
+
+      if (matchCategory && matchStatus && matchSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const badge = document.getElementById('activeCountBadge');
+    if (badge) badge.innerText = `${visibleCount} complaints`;
+
+    const emptyState = document.getElementById('emptyResultsState');
+    if (visibleCount === 0) {
+      emptyState.classList.remove('hidden');
+      emptyState.classList.add('flex');
+    } else {
+      emptyState.classList.add('hidden');
+      emptyState.classList.remove('flex');
+    }
+  }
+
+  function resetFilters() {
+    clearSearch();
+    const firstCat = document.querySelector('#categoryFilterRow button');
+    if (firstCat) filterCategory('All', firstCat);
+    const firstStatus = document.querySelector('.status-seg-pill');
+    if (firstStatus) filterStatus('ALL', firstStatus);
+  }
+
+  function updateRowStatus(id, newStatus) {
+    const card = document.querySelector(`.complain-card[data-id="${id}"]`);
+    if (!card) return;
+    card.setAttribute('data-status', newStatus);
+    const select = card.querySelector('select');
+    if (select) {
+      select.value = newStatus;
+      if (newStatus === 'Resolved') {
+        select.className = "appearance-none bg-[#D1FAE5] text-[#065F46] border border-[#6EE7B7] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm";
+      } else if (newStatus === 'In Progress') {
+        select.className = "appearance-none bg-[#FEF3C7] text-[#92400E] border border-[#FCD34D] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm";
+      } else {
+        select.className = "appearance-none bg-[#FEF2F2] text-[#991B1B] border border-[#FCA5A5] rounded font-label-badge text-[11px] font-bold pl-2.5 pr-6 py-1 cursor-pointer focus:outline-none uppercase shadow-sm";
+      }
+    }
+    applyFilters();
+  }
+
+  function advanceComplainStatus(id, newStatus) {
+    updateRowStatus(id, newStatus);
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#FFFFFF] border-t border-[#E2E8F0] shadow-sm"><div class="flex items-center justify-around h-16 px-gutter-mobile"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs text-[#64748B] hover:text-[#1E3A8A] transition-colors font-medium flex-1" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs text-[#1E3A8A] font-bold transition-colors flex-1" data-path="complaint-queue" href="#"><span class="material-symbols-outlined text-[22px]">inbox</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase font-bold">Complaint Queue</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-space-xs text-[#64748B] hover:text-[#1E3A8A] transition-colors font-medium flex-1" data-path="new-ticket" href="#"><span class="material-symbols-outlined text-[20px]">add_circle</span><span class="font-body-sm text-[11px] mt-0.5 tracking-tight uppercase">Raise Complain</span></a></div></nav>
+
+
+</body></html>

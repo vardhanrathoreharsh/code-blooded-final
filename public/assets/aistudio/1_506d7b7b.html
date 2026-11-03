@@ -1,0 +1,463 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Student Facility Desk - CampusPulse</title>
+<!-- Tailwind CSS CDN with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              navy: '#0f2744',
+              navyDark: '#0a1d33',
+              navyBtn: '#102a43',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Precision Tuning -->
+<style data-purpose="custom-layout">
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-slate-800 bg-[#f8fafc]">
+<!-- BEGIN: TopNavigationBar -->
+<header class="w-full bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm" data-purpose="top-navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo & Main Nav -->
+<div class="flex items-center space-x-8">
+<!-- Logo -->
+<a class="flex items-center space-x-2.5 text-slate-900 group" href="#">
+<svg class="w-6 h-6 text-indigo-900" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+</svg>
+<span class="font-bold text-lg tracking-tight text-[#0f2744]">CampusPulse</span>
+</a>
+<!-- Main Navigation Links -->
+<nav class="hidden md:flex items-center space-x-1 sm:space-x-2 text-sm font-medium">
+<a class="px-3.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition-colors" href="#">
+            Role Selection / Access
+          </a>
+<a class="px-4 py-1.5 rounded-md bg-[#172c47] text-white font-medium text-xs tracking-wide shadow-sm" href="#">
+            Student Portal
+          </a>
+<a class="px-3.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition-colors" href="#">
+            Administrator Triage &amp; Analytics
+          </a>
+</nav>
+</div>
+<!-- Right Sync Status & User Avatar -->
+<div class="flex items-center space-x-4">
+<!-- Live Sync Pill -->
+<div class="hidden sm:flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+<span class="">Local Persistence Active</span>
+<span class="text-slate-300">•</span>
+<span class="">Auto-synced</span>
+</div>
+<!-- User Profile Avatar -->
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-slate-300 ring-2 ring-slate-100 flex-shrink-0 cursor-pointer">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBUQWQH7exGu5WCRtDbJYQh_Cu34NhLn5a5IOF6Wl9S2fL1hL5YBkXol9foLkjTPRsX8GH_tPmDlXduJfbWMfktevw-Hlb5uH0iBerlQR2z7Oki30oyv4owAYVpSdrLDs4LhYbBBop3j4wyl80p13SYMpZecc22B8PBt0e7E1wbI-JpNNBkWOl__y2l_JKWZY35aJID_RHgd08yrS9ptWZYtzOWj17-oobbjF6KdCo">
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopNavigationBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+<!-- BEGIN: HeaderTitleSection -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4" data-purpose="page-header">
+<div>
+<div class="flex items-center space-x-2 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+<span class="w-2 h-2 rounded-full bg-rose-500"></span>
+<span class="">CAMPUS RESOLVE</span>
+<span class="">•</span>
+<span class="">REAL-TIME CAMPUS SYNC</span>
+</div>
+<h1 class="text-2xl sm:text-3xl font-extrabold text-[#0f2744] tracking-tight mt-1">
+          STUDENT FACILITY DESK
+        </h1>
+<p class="text-xs sm:text-sm font-semibold tracking-wide text-slate-500 uppercase mt-0.5">
+          MY SUBMITTED REPORTS &amp; INCIDENT TRACKER
+        </p>
+</div>
+<!-- Action Button -->
+<div>
+<button class="inline-flex items-center px-4 py-2.5 rounded-md bg-[#102a43] hover:bg-[#0c1f33] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900" type="button">
+<span class="mr-1 text-sm font-light">+</span> + RAISE COMPLAINT
+        </button>
+</div>
+</section>
+<!-- END: HeaderTitleSection -->
+<!-- BEGIN: StatsGrid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="metrics-overview">
+<!-- Card 1: Total Complaints -->
+<div class="bg-white rounded-lg p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between h-36">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">TOTAL COMPLAINTS</span>
+<svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="7" width="7" x="3" y="3"></rect>
+<rect height="7" width="7" x="14" y="3"></rect>
+<rect height="7" width="7" x="14" y="14"></rect>
+<rect height="7" width="7" x="3" y="14"></rect>
+</svg>
+</div>
+<div class="flex items-baseline justify-between mt-2">
+<span class="text-4xl font-extrabold text-slate-900 tracking-tight">6</span>
+<span class="text-xs font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-600 border border-slate-200/60">
+            +2 this week
+          </span>
+</div>
+</div>
+<!-- Card 2: Pending Unresolved -->
+<div class="bg-white rounded-lg p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between h-36">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold tracking-wider text-rose-600 uppercase">PENDING UNRESOLVED</span>
+<svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+<line x1="12" x2="12" y1="9" y2="13"></line>
+<line x1="12" x2="12.01" y1="17" y2="17"></line>
+</svg>
+</div>
+<div class="flex items-baseline justify-between mt-2">
+<span class="text-4xl font-extrabold text-rose-600 tracking-tight">4</span>
+<span class="text-xs font-semibold px-2.5 py-1 rounded bg-rose-50 text-rose-600 border border-rose-200/60">
+            SLA ACTIVE
+          </span>
+</div>
+</div>
+<!-- Card 3: In Progress -->
+<div class="bg-white rounded-lg p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between h-36">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold tracking-wider text-amber-600 uppercase">IN PROGRESS</span>
+<svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+</div>
+<div class="flex items-baseline justify-between mt-2">
+<span class="text-4xl font-extrabold text-amber-500 tracking-tight">1</span>
+<span class="text-xs font-semibold px-2.5 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200/60">
+            ~2.4h cycle
+          </span>
+</div>
+</div>
+<!-- Card 4: Resolved -->
+<div class="bg-white rounded-lg p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between h-36">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold tracking-wider text-slate-700 uppercase">RESOLVED</span>
+<svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+<polyline points="22 4 12 14.01 9 11.01"></polyline>
+</svg>
+</div>
+<div class="flex items-baseline justify-between mt-2">
+<span class="text-4xl font-extrabold text-slate-900 tracking-tight">1</span>
+<span class="text-xs font-semibold px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/60">98% satisfaction</span>
+</div>
+</div>
+</section>
+<!-- END: StatsGrid -->
+<!-- BEGIN: TriageMeshBanner -->
+<section class="bg-white rounded-lg p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4" data-purpose="triage-banner">
+<div class="flex items-center space-x-3.5">
+<div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 text-slate-700 border border-slate-200">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="18" cy="5" r="3"></circle>
+<circle cx="6" cy="12" r="3"></circle>
+<circle cx="18" cy="19" r="3"></circle>
+<line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+<line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+</svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-900">Campus Infrastructure Triage Mesh</h2>
+<p class="text-xs text-slate-500 mt-0.5">
+            Deterministic urgency score = Category Weight (Lab: 3, Wi-Fi: 2, Hostel: 2, Class: 1) + floor(Hours / 24)
+          </p>
+</div>
+</div>
+<!-- Latency Curve Graph -->
+<div class="flex items-center space-x-3 self-end md:self-center pr-2">
+<svg class="w-32 h-8 overflow-visible" fill="none" viewBox="0 0 120 30">
+<path d="M 2 24 C 20 24, 25 18, 45 22 C 65 26, 75 14, 90 8 C 98 5, 106 14, 115 17" fill="none" stroke="#0f172a" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="115" cy="17" fill="#e11d48" r="2.5"></circle>
+</svg>
+<span class="text-xs font-mono font-medium text-slate-600 whitespace-nowrap">
+          LATENCY <strong class="text-slate-800">42ms</strong>
+</span>
+</div>
+</section>
+<!-- END: TriageMeshBanner -->
+<!-- BEGIN: SubmissionLedgerSection -->
+<section class="space-y-4" data-purpose="submission-ledger">
+<!-- Filter Bar & Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+<div class="flex items-center space-x-2.5">
+<h2 class="text-base font-bold text-slate-900 tracking-tight">MY SUBMISSION LEDGER</h2>
+<span class="text-[11px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-200/70 text-slate-600">
+            5 COMPLAINTS
+          </span>
+</div>
+<!-- Filter Tags -->
+<div class="flex items-center space-x-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs">
+<button class="px-3 py-1.5 rounded-md font-semibold bg-[#102a43] text-white transition-colors">
+            All (5)
+          </button>
+<button class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+            Wi-Fi (1)
+          </button>
+<button class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+            Hostel (2)
+          </button>
+<button class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+            Classroom (1)
+          </button>
+<button class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+            Laboratory (1)
+          </button>
+</div>
+</div>
+<!-- Ticket List Container -->
+<div class="space-y-3" data-purpose="tickets-container">
+<!-- Ticket Item 1 -->
+<article class="bg-white rounded-lg border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="space-y-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">C03</span>
+<span class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">CLASSROOM • +1</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-600 border border-rose-200 uppercase">72H PENDING</span>
+<span class="text-xs font-mono text-slate-500">Score 4.0</span>
+</div>
+<h3 class="text-sm font-semibold text-slate-900 leading-snug">
+                Overhead projector lamp flickering and ballast failing in Hall 102
+              </h3>
+<div class="flex items-center space-x-3 text-xs text-slate-500 font-medium pt-0.5">
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">Hall 102, West Wing</span>
+</div>
+<span class="">•</span>
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">72h ago</span>
+</div>
+</div>
+</div>
+<!-- Status Badge Right -->
+<div class="sm:self-center flex-shrink-0">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-600 border border-rose-200">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600 mr-1.5"></span>
+                RAISED
+              </span>
+</div>
+</div>
+</article>
+<!-- Ticket Item 2 -->
+<article class="bg-white rounded-lg border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="space-y-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">C01</span>
+<span class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">WI-FI • +2</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-600 border border-rose-200 uppercase">48H PENDING</span>
+<span class="text-xs font-mono text-slate-500">Score 4.0</span>
+</div>
+<h3 class="text-sm font-semibold text-slate-900 leading-snug">
+                5GHz AP drops constantly in Block B 3rd floor corridor
+              </h3>
+<div class="flex items-center space-x-3 text-xs text-slate-500 font-medium pt-0.5">
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">Block B 3rd Floor Corridor</span>
+</div>
+<span class="">•</span>
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">48h ago</span>
+</div>
+</div>
+</div>
+<!-- Status Badge Right -->
+<div class="sm:self-center flex-shrink-0">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-600 border border-rose-200">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600 mr-1.5"></span>
+                RAISED
+              </span>
+</div>
+</div>
+</article>
+<!-- Ticket Item 3 -->
+<article class="bg-white rounded-lg border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="space-y-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">C02</span>
+<span class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">HOSTEL • +2</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 uppercase">8H PENDING</span>
+<span class="text-xs font-mono text-slate-500">Score 2.0</span>
+</div>
+<h3 class="text-sm font-semibold text-slate-900 leading-snug">
+                Water heater tripping main breaker in Wing C 2nd floor bathroom
+              </h3>
+<div class="flex items-center space-x-3 text-xs text-slate-500 font-medium pt-0.5">
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">Wing C 2nd Floor</span>
+</div>
+<span class="">•</span>
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">8h ago</span>
+</div>
+</div>
+</div>
+<!-- Status Badge Right -->
+<div class="sm:self-center flex-shrink-0">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-50 text-amber-700 border border-amber-200">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600 mr-1.5"></span>
+                IN PROGRESS
+              </span>
+</div>
+</div>
+</article>
+<!-- Ticket Item 4 -->
+<article class="bg-white rounded-lg border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="space-y-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">C05</span>
+<span class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">HOSTEL • +2</span>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 uppercase">4H PENDING</span>
+<span class="text-xs font-mono text-slate-500">Score 2.0</span>
+</div>
+<h3 class="text-sm font-semibold text-slate-900 leading-snug">
+                Window latch stuck open in Room 304 North block during heavy rainfall
+              </h3>
+<div class="flex items-center space-x-3 text-xs text-slate-500 font-medium pt-0.5">
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">North Block, Room 304</span>
+</div>
+<span class="">•</span>
+<div class="flex items-center space-x-1">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">4h ago</span>
+</div>
+</div>
+</div>
+<!-- Status Badge Right -->
+<div class="sm:self-center flex-shrink-0">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-600 border border-rose-200">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600 mr-1.5"></span>
+                RAISED
+              </span>
+</div>
+</div>
+</article>
+<!-- Ticket Item 5 -->
+<article class="bg-white rounded-lg border border-slate-200/80 p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-shadow"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div class="space-y-2"><div class="flex flex-wrap items-center gap-2"><span class="text-xs font-mono font-bold text-slate-800 bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded">C04</span><span class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">LABORATORY • +3</span><span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase">CLOSED</span><span class="text-xs font-mono text-slate-500">Score 7.0</span></div><h3 class="text-sm font-semibold text-slate-900 leading-snug">Centrifuge unit 4 displaying recurring error code E-12</h3><div class="flex items-center space-x-3 text-xs text-slate-500 font-medium pt-0.5"><div class="flex items-center space-x-1"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Biotech Lab 3</span></div><span class="">•</span><div class="flex items-center space-x-1"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">96h ago (Closed)</span></div></div></div><div class="sm:self-center flex-shrink-0"><span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mr-1.5"></span>RESOLVED</span></div></div></article>
+</div>
+</section>
+<!-- END: SubmissionLedgerSection -->
+<!-- BEGIN: FeatureCardsRow -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4" data-purpose="operational-cards">
+<!-- Card 1 -->
+<div class="bg-white rounded-lg border border-slate-200/80 p-5 shadow-sm space-y-2">
+<div class="flex items-center space-x-2.5 text-slate-900">
+<svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
+</svg>
+<h3 class="text-sm font-bold text-slate-900">Electricians on Duty</h3>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+          Shift Alpha covering South Campus &amp; Residence Halls. Standard response SLA is within 4 hours.
+        </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-lg border border-slate-200/80 p-5 shadow-sm space-y-2">
+<div class="flex items-center space-x-2.5 text-slate-900">
+<svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="8" rx="2" ry="2" width="20" x="2" y="2"></rect>
+<rect height="8" rx="2" ry="2" width="20" x="2" y="14"></rect>
+<line x1="6" x2="6.01" y1="6" y2="6"></line>
+<line x1="6" x2="6.01" y1="18" y2="18"></line>
+</svg>
+<h3 class="text-sm font-bold text-slate-900">Network NOC Ops</h3>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+          Central NOC monitoring 28 campus AP controllers. High packet drop escalations are prioritized.
+        </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-lg border border-slate-200/80 p-5 shadow-sm space-y-2">
+<div class="flex items-center space-x-2.5 text-slate-900">
+<svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+<path d="M9 12l2 2 4-4"></path>
+</svg>
+<h3 class="text-sm font-bold text-slate-900">Audit Verification</h3>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+          Every completed ticket prompts a digital sign-off from student before ticket ledger locks.
+        </p>
+</div>
+</section>
+<!-- END: FeatureCardsRow -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: PageFooter -->
+<footer class="w-full bg-[#f8fafc] border-t border-slate-200/70 py-6 mt-6" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<p class="text-[11px] font-semibold tracking-wider text-slate-600 uppercase">
+        © CAMPUS RESOLVE OPERATIONS • REAL-TIME CAMPUS SYNC • DETERMINISTIC PRIORITY ALGORITHM V2.4
+      </p>
+</div>
+</footer>
+<!-- END: PageFooter -->
+
+
+</body></html>
